@@ -1,0 +1,207 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#222227"
+    tools:context=".client.activities.RegistrationActivity">
+
+    <ImageView
+        android:id="@+id/imageRect1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="10dp"
+        app:layout_constraintBottom_toTopOf="@+id/imageRect4"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.495"
+        app:layout_constraintStart_toStartOf="parent"
+        app:srcCompat="@drawable/rectalngle_login" />
+
+    <ImageView
+        android:id="@+id/imageRect2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="276dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.495"
+        app:layout_constraintStart_toStartOf="parent"
+        app:srcCompat="@drawable/rectalngle_login" />
+
+    <ImageView
+        android:id="@+id/imageRect3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="12dp"
+        app:layout_constraintBottom_toTopOf="@+id/imageRect2"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.495"
+        app:layout_constraintStart_toStartOf="parent"
+        app:srcCompat="@drawable/rectalngle_login" />
+
+    <ImageView
+        android:id="@+id/imageRect4"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="12dp"
+        app:layout_constraintBottom_toTopOf="@+id/imageRect3"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.504"
+        app:layout_constraintStart_toStartOf="parent"
+        app:srcCompat="@drawable/rectalngle_login" />
+
+    <ImageView
+        android:id="@+id/imageRect"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="10dp"
+        app:layout_constraintBottom_toTopOf="@+id/imageRect1"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.495"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textRegistr"
+        app:layout_constraintVertical_bias="1.0"
+        app:srcCompat="@drawable/rectalngle_login" />
+
+    <TextView
+        android:id="@+id/textRegistr"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Регистрация"
+        android:textColor="#D8D8D8"
+        android:textSize="45sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.14999998" />
+
+    <CheckBox
+        android:id="@+id/checkBox"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Преподаватель"
+        android:textColor="#D8D8D8"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.216"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/imageRect2"
+        app:layout_constraintVertical_bias="0.0" />
+
+    <Button
+        android:id="@+id/buttonRegistrationNext"
+        android:layout_width="116dp"
+        android:layout_height="45dp"
+        android:layout_marginTop="56dp"
+        android:backgroundTint="#D8D8D8"
+        android:text="Далее"
+        android:textColor="#222227"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/checkBox"
+        app:layout_constraintVertical_bias="0.0" />
+
+    <EditText
+        android:id="@+id/editTextNameRegistration"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:backgroundTint="#D8D8D8"
+        android:ems="10"
+        android:inputType="text"
+        android:text="Имя"
+        android:textColor="#ACACAC"
+        app:layout_constraintBottom_toBottomOf="@+id/imageRect"
+        app:layout_constraintEnd_toEndOf="@+id/imageRect"
+        app:layout_constraintHorizontal_bias="0.493"
+        app:layout_constraintStart_toStartOf="@+id/imageRect"
+        app:layout_constraintTop_toTopOf="@+id/imageRect"
+        app:layout_constraintVertical_bias="0.444" />
+
+    <EditText
+        android:id="@+id/editTextSurnameRegistration"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:backgroundTint="#D8D8D8"
+        android:ems="10"
+        android:inputType="text"
+        android:text="Фамилия"
+        android:textColor="#ACACAC"
+        app:layout_constraintBottom_toBottomOf="@+id/imageRect1"
+        app:layout_constraintEnd_toEndOf="@+id/imageRect1"
+        app:layout_constraintStart_toStartOf="@+id/imageRect1"
+        app:layout_constraintTop_toTopOf="@+id/imageRect1" />
+
+    <EditText
+        android:id="@+id/editTextEmailRegistration"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:backgroundTint="#D8D8D8"
+        android:ems="10"
+        android:inputType="textEmailAddress"
+        android:text="Эл. почта"
+        android:textColor="#ACACAC"
+        app:layout_constraintBottom_toBottomOf="@+id/imageRect4"
+        app:layout_constraintEnd_toEndOf="@+id/imageRect4"
+        app:layout_constraintStart_toStartOf="@+id/imageRect4"
+        app:layout_constraintTop_toTopOf="@+id/imageRect4" />
+
+    <EditText
+        android:id="@+id/editTextPasswordRegistration1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:backgroundTint="#D8D8D8"
+        android:ems="10"
+        android:inputType="text"
+        android:password="false"
+        android:text="Пароль"
+        android:textColor="#ACACAC"
+        app:layout_constraintBottom_toBottomOf="@+id/imageRect3"
+        app:layout_constraintEnd_toEndOf="@+id/imageRect3"
+        app:layout_constraintStart_toStartOf="@+id/imageRect3"
+        app:layout_constraintTop_toTopOf="@+id/imageRect3" />
+
+    <EditText
+        android:id="@+id/editTextPasswordRegistration2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:backgroundTint="#D8D8D8"
+        android:ems="10"
+        android:inputType="text"
+        android:password="false"
+        android:text="Повторите пароль"
+        android:textColor="#ACACAC"
+        app:layout_constraintBottom_toBottomOf="@+id/imageRect2"
+        app:layout_constraintEnd_toEndOf="@+id/imageRect2"
+        app:layout_constraintStart_toStartOf="@+id/imageRect2"
+        app:layout_constraintTop_toTopOf="@+id/imageRect2" />
+
+    <ImageView
+        android:id="@+id/imageBack"
+        android:layout_width="56dp"
+        android:layout_height="56dp"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="30dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.0"
+        app:srcCompat="@android:drawable/ic_menu_revert" />
+
+    <Button
+        android:id="@+id/buttonBack"
+        android:layout_width="52dp"
+        android:layout_height="50dp"
+        android:backgroundTint="#00FFFFFF"
+        app:layout_constraintBottom_toBottomOf="@+id/imageBack"
+        app:layout_constraintEnd_toEndOf="@+id/imageBack"
+        app:layout_constraintStart_toStartOf="@+id/imageBack"
+        app:layout_constraintTop_toTopOf="@+id/imageBack" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

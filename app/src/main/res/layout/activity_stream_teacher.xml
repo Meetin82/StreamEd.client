@@ -1,0 +1,177 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#222227"
+    tools:context=".client.activities.StreamTeacherActivity">
+
+    <ImageView
+        android:id="@+id/imageTranslation"
+        android:layout_width="403dp"
+        android:layout_height="285dp"
+        android:layout_marginTop="15dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.0"
+        app:srcCompat="@drawable/cat" />
+
+    <EditText
+        android:id="@+id/editTextSendMsgInChat"
+        android:layout_width="396dp"
+        android:layout_height="43dp"
+        android:layout_marginTop="10dp"
+        android:backgroundTint="#FFFFFF"
+        android:ems="10"
+        android:inputType="text"
+        android:text="Введите ваш комментарий"
+        android:textColor="#D8D8D8"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/imageTranslation"
+        app:layout_constraintVertical_bias="0.0" />
+
+    <Button
+        android:id="@+id/buttonSendMessage"
+        android:layout_width="172dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="3dp"
+        android:layout_marginTop="3dp"
+        android:backgroundTint="#D8D8D8"
+        android:text="Отправить "
+        android:textColor="#222227"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/editTextSendMsgInChat"
+        app:layout_constraintVertical_bias="0.0" />
+
+    <TextView
+        android:id="@+id/textChat1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="7dp"
+        android:layout_marginTop="7dp"
+        android:text="Алексей Алексеевич, 17:10 - Вау, полезно!"
+        android:textColor="#D7D7D7"
+        android:textSize="14sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/buttonSendMessage"
+        app:layout_constraintVertical_bias="0.0" />
+
+    <TextView
+        android:id="@+id/textChat2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="7dp"
+        android:layout_marginTop="15dp"
+        android:text="Сергей Сергеич, 17:13 - Очень круто!"
+        android:textColor="#D7D7D7"
+        android:textSize="14sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/buttonDeleteChat1"
+        app:layout_constraintVertical_bias="0.0" />
+
+    <Button
+        android:id="@+id/buttonDeleteChat1"
+        android:layout_width="202dp"
+        android:layout_height="38dp"
+        android:layout_marginTop="-6dp"
+        android:backgroundTint="#00FFFFFF"
+        android:text="Удалить комментарий"
+        android:textColor="#D80000"
+        android:textSize="14sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textChat1"
+        app:layout_constraintVertical_bias="0.0" />
+
+    <Button
+        android:id="@+id/buttonDeleteChat2"
+        android:layout_width="202dp"
+        android:layout_height="38dp"
+        android:layout_marginTop="-6dp"
+        android:backgroundTint="#00FFFFFF"
+        android:text="Удалить комментарий"
+        android:textColor="#D80000"
+        android:textSize="14sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textChat2"
+        app:layout_constraintVertical_bias="0.0" />
+
+    <ImageView
+        android:id="@+id/imageEllipseForMembers"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="28dp"
+        android:layout_marginBottom="25dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="1.0"
+        app:srcCompat="@drawable/ellipse" />
+
+    <ImageView
+        android:id="@+id/imagePersonForMembers"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="@+id/imageEllipseForMembers"
+        app:layout_constraintEnd_toEndOf="@+id/imageEllipseForMembers"
+        app:layout_constraintStart_toStartOf="@+id/imageEllipseForMembers"
+        app:layout_constraintTop_toTopOf="@+id/imageEllipseForMembers"
+        app:srcCompat="@drawable/profile_active" />
+
+    <ImageView
+        android:id="@+id/imageExitFromStream"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="28dp"
+        android:layout_marginBottom="25dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.989"
+        app:srcCompat="@drawable/exit" />
+
+    <Button
+        android:id="@+id/buttonExitFromStream"
+        android:layout_width="56dp"
+        android:layout_height="59dp"
+        android:backgroundTint="#00FFFFFF"
+        app:layout_constraintBottom_toBottomOf="@+id/imageExitFromStream"
+        app:layout_constraintEnd_toEndOf="@+id/imageExitFromStream"
+        app:layout_constraintStart_toStartOf="@+id/imageExitFromStream"
+        app:layout_constraintTop_toTopOf="@+id/imageExitFromStream" />
+
+    <Button
+        android:id="@+id/buttonCheckMembers"
+        android:layout_width="66dp"
+        android:layout_height="63dp"
+        android:backgroundTint="#00FFFFFF"
+        app:layout_constraintBottom_toBottomOf="@+id/imageEllipseForMembers"
+        app:layout_constraintEnd_toEndOf="@+id/imageEllipseForMembers"
+        app:layout_constraintStart_toStartOf="@+id/imageEllipseForMembers"
+        app:layout_constraintTop_toTopOf="@+id/imageEllipseForMembers" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

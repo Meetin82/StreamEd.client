@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <uses-permission android:name="android.permission.INTERNET"/>
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION"/>
+
+    <application
+        android:allowBackup="true"
+        android:dataExtractionRules="@xml/data_extraction_rules"
+        android:fullBackupContent="@xml/backup_rules"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
+        android:usesCleartextTraffic="true"
+        android:roundIcon="@mipmap/ic_launcher_round"
+        android:supportsRtl="true"
+        android:theme="@style/Theme.StreamEd_app"
+        tools:targetApi="31">
+        <activity
+            android:name=".client.activities.ProfileUserStudentActivity"
+            android:exported="false" />
+        <activity
+            android:name=".client.activities.VideoStudentActivity"
+            android:exported="false" />
+        <activity
+            android:name=".client.activities.TimetableStudentActivity"
+            android:exported="false" />
+        <activity
+            android:name=".client.activities.CatologCoursesActivity"
+            android:exported="false" />
+        <activity
+            android:name=".client.activities.ConnectUserStudentActivity"
+            android:exported="false" />
+        <activity
+            android:name=".client.activities.StreamStudentActivity"
+            android:exported="false" />
+        <activity
+            android:name=".client.activities.MembersStreamingActivity"
+            android:exported="false" />
+        <activity
+            android:name=".client.activities.StreamTeacherActivity"
+            android:exported="false" />
+        <activity
+            android:name=".client.activities.MyCoursesUserTeacherActivity"
+            android:exported="false" />
+        <activity
+            android:name=".client.activities.EditingProfileUserActivity"
+            android:exported="false" />
+        <activity
+            android:name=".client.activities.AddingLessonUserTeacherActivity"
+            android:exported="false" />
+        <activity
+            android:name=".client.activities.ProfileUserTeacherActivity"
+            android:exported="false" />
+        <activity
+            android:name=".client.activities.CreatingCourseUserTeacherActivity"
+            android:exported="false" />
+        <activity
+            android:name=".client.activities.LessonsUserTeacherActivity"
+            android:exported="false" />
+        <activity
+            android:name=".client.activities.ConnectUserTeacherActivity"
+            android:exported="false" />
+        <activity
+            android:name=".client.activities.ForgetPasswordActivity2"
+            android:exported="false" />
+        <activity
+            android:name=".client.activities.ForgetPasswordActivity"
+            android:exported="false" />
+        <activity
+            android:name=".client.activities.RegistrationActivity"
+            android:exported="false" />
+        <activity
+            android:name=".client.activities.LoginUserActivity"
+            android:exported="false" />
+        <activity
+            android:name=".client.activities.UnloginCoursesActivity"
+            android:exported="false" />
+        <activity
+            android:name=".client.activities.SplashActivity"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name=".client.activities.MainActivity"
+            android:exported="false" />
+    </application>
+
+</manifest>
