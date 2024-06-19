@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:padding="8dp">
+
+    <ImageView
+        android:id="@+id/imageFormCourseList"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.0"
+        app:srcCompat="@drawable/rect_for_course_list" />
+
+    <TextView
+        android:id="@+id/textDateCourse"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="17dp"
+        android:text="10.08.2024 11:00-12:30"
+        android:textColor="#222227"
+        android:textSize="16sp"
+        app:layout_constraintBottom_toBottomOf="@+id/imageFormCourseList"
+        app:layout_constraintEnd_toEndOf="@+id/imageFormCourseList"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@+id/imageFormCourseList"
+        app:layout_constraintTop_toTopOf="@+id/imageFormCourseList"
+        app:layout_constraintVertical_bias="0.0" />
+
+    <TextView
+        android:id="@+id/textNamingCourseInList"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="10dp"
+        android:text="Курс &quot;Хороший, плохой, злой&quot;"
+        android:textColor="#222227"
+        android:textSize="16sp"
+        app:layout_constraintBottom_toBottomOf="@+id/imageFormCourseList"
+        app:layout_constraintEnd_toEndOf="@+id/imageFormCourseList"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@+id/imageFormCourseList"
+        app:layout_constraintTop_toBottomOf="@+id/textDateCourse"
+        app:layout_constraintVertical_bias="0.0" />
+
+    <TextView
+        android:id="@+id/textCodeMain"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:text="Код руководителя: ******"
+        android:textColor="#222227"
+        android:textSize="16sp"
+        app:layout_constraintBottom_toBottomOf="@+id/imageFormCourseList"
+        app:layout_constraintEnd_toEndOf="@+id/imageFormCourseList"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@+id/imageFormCourseList"
+        app:layout_constraintTop_toBottomOf="@+id/textNamingCourseInList"
+        app:layout_constraintVertical_bias="0.0" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

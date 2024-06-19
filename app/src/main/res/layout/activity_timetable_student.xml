@@ -1,0 +1,265 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#222227"
+    tools:context=".client.activities.TimetableStudentActivity">
+
+    <ImageView
+        android:id="@+id/imageFormCourseList"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="70dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.0"
+        app:srcCompat="@drawable/rect_for_course_list" />
+
+    <TextView
+        android:id="@+id/textCodeMain"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:text="Код руководителя: ******"
+        android:textColor="#222227"
+        android:textSize="16sp"
+        app:layout_constraintBottom_toBottomOf="@+id/imageFormCourseList"
+        app:layout_constraintEnd_toEndOf="@+id/imageFormCourseList"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@+id/imageFormCourseList"
+        app:layout_constraintTop_toBottomOf="@+id/textNamingCourseInList"
+        app:layout_constraintVertical_bias="0.0" />
+
+    <TextView
+        android:id="@+id/textDateCourse"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="17dp"
+        android:text="10.08.2024 11:00-12:30"
+        android:textColor="#222227"
+        android:textSize="16sp"
+        app:layout_constraintBottom_toBottomOf="@+id/imageFormCourseList"
+        app:layout_constraintEnd_toEndOf="@+id/imageFormCourseList"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@+id/imageFormCourseList"
+        app:layout_constraintTop_toTopOf="@+id/imageFormCourseList"
+        app:layout_constraintVertical_bias="0.0" />
+
+    <TextView
+        android:id="@+id/textNamingCourseInList"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="10dp"
+        android:text="Курс &quot;Хороший, плохой, злой&quot;"
+        android:textColor="#222227"
+        android:textSize="16sp"
+        app:layout_constraintBottom_toBottomOf="@+id/imageFormCourseList"
+        app:layout_constraintEnd_toEndOf="@+id/imageFormCourseList"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@+id/imageFormCourseList"
+        app:layout_constraintTop_toBottomOf="@+id/textDateCourse"
+        app:layout_constraintVertical_bias="0.0" />
+
+    <ImageView
+        android:id="@+id/imageLineLowBar"
+        android:layout_width="390dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="680dp"
+        android:scaleX="2.5"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.333"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.0"
+        app:srcCompat="@drawable/line_low_bar" />
+
+    <Button
+        android:id="@+id/buttonConnect"
+        android:layout_width="78.4dp"
+        android:layout_height="112dp"
+        android:backgroundTint="#00FFFFFF"
+        android:visibility="visible"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/imageLineLowBar"
+        app:layout_constraintVertical_bias="0.0"
+        tools:visibility="visible" />
+
+    <Button
+        android:id="@+id/buttonCatalog"
+        android:layout_width="78.4dp"
+        android:layout_height="112dp"
+        android:backgroundTint="#00FFFFFF"
+        android:visibility="visible"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/buttonConnect"
+        app:layout_constraintTop_toBottomOf="@+id/imageLineLowBar"
+        app:layout_constraintVertical_bias="0.0"
+        tools:visibility="visible" />
+
+    <Button
+        android:id="@+id/buttonTimetable"
+        android:layout_width="78.4dp"
+        android:layout_height="112dp"
+        android:backgroundTint="#00FFFFFF"
+        android:visibility="visible"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/buttonCatalog"
+        app:layout_constraintTop_toBottomOf="@+id/imageLineLowBar"
+        app:layout_constraintVertical_bias="0.0"
+        tools:visibility="visible" />
+
+    <Button
+        android:id="@+id/buttonVideo"
+        android:layout_width="78.4dp"
+        android:layout_height="112dp"
+        android:backgroundTint="#00FFFFFF"
+        android:visibility="visible"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/buttonTimetable"
+        app:layout_constraintTop_toBottomOf="@+id/imageLineLowBar"
+        app:layout_constraintVertical_bias="0.0"
+        tools:visibility="visible" />
+
+    <Button
+        android:id="@+id/buttonProfile"
+        android:layout_width="78.4dp"
+        android:layout_height="112dp"
+        android:backgroundTint="#00FFFFFF"
+        android:visibility="visible"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/buttonVideo"
+        app:layout_constraintTop_toBottomOf="@+id/imageLineLowBar"
+        app:layout_constraintVertical_bias="0.0"
+        tools:visibility="visible" />
+
+    <ImageView
+        android:id="@+id/imageConnectStudent"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="@+id/buttonConnect"
+        app:layout_constraintStart_toStartOf="@+id/buttonConnect"
+        app:layout_constraintTop_toTopOf="@+id/buttonConnect"
+        app:layout_constraintVertical_bias="0.00999999"
+        app:srcCompat="@drawable/connect" />
+
+    <ImageView
+        android:id="@+id/imageCatalog"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        app:layout_constraintBottom_toBottomOf="@+id/buttonCatalog"
+        app:layout_constraintEnd_toStartOf="@+id/buttonTimetable"
+        app:layout_constraintStart_toEndOf="@+id/buttonConnect"
+        app:layout_constraintTop_toTopOf="@+id/buttonCatalog"
+        app:layout_constraintVertical_bias="0.0"
+        app:srcCompat="@drawable/catalog" />
+
+    <ImageView
+        android:id="@+id/imageTimetableActive"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="@+id/buttonTimetable"
+        app:layout_constraintStart_toEndOf="@+id/buttonCatalog"
+        app:layout_constraintTop_toTopOf="@+id/buttonTimetable"
+        app:layout_constraintVertical_bias="0.0"
+        app:srcCompat="@drawable/calendar_active" />
+
+    <ImageView
+        android:id="@+id/imageVideo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/buttonProfile"
+        app:layout_constraintStart_toEndOf="@+id/buttonTimetable"
+        app:layout_constraintTop_toTopOf="@+id/buttonVideo"
+        app:layout_constraintVertical_bias="0.0"
+        app:srcCompat="@drawable/video" />
+
+    <ImageView
+        android:id="@+id/imageProfile"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/buttonProfile"
+        app:layout_constraintTop_toTopOf="@+id/buttonProfile"
+        app:layout_constraintVertical_bias="0.0"
+        app:srcCompat="@drawable/profile" />
+
+    <TextView
+        android:id="@+id/textConnect"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Подключиться"
+        android:textColor="#D8D8D8"
+        android:textSize="10dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="@+id/buttonConnect"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/imageConnectStudent" />
+
+    <TextView
+        android:id="@+id/textCatalog"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Каталог"
+        android:textColor="#D8D8D8"
+        android:textSize="10dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="@+id/buttonCatalog"
+        app:layout_constraintStart_toEndOf="@+id/buttonConnect"
+        app:layout_constraintTop_toBottomOf="@+id/imageCatalog" />
+
+    <TextView
+        android:id="@+id/textTimetable"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Расписание"
+        android:textColor="#D8D8D8"
+        android:textSize="10dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="@+id/buttonTimetable"
+        app:layout_constraintStart_toEndOf="@+id/buttonCatalog"
+        app:layout_constraintTop_toBottomOf="@+id/imageTimetableActive" />
+
+    <TextView
+        android:id="@+id/textVideo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Видео"
+        android:textColor="#D8D8D8"
+        android:textSize="10dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/buttonProfile"
+        app:layout_constraintStart_toEndOf="@+id/buttonTimetable"
+        app:layout_constraintTop_toBottomOf="@+id/imageVideo" />
+
+    <TextView
+        android:id="@+id/textProfile"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Профиль"
+        android:textColor="#D8D8D8"
+        android:textSize="10dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="@+id/buttonProfile"
+        app:layout_constraintStart_toStartOf="@+id/buttonProfile"
+        app:layout_constraintTop_toBottomOf="@+id/imageProfile" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
