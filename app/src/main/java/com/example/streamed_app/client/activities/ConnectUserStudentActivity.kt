@@ -58,6 +58,7 @@ class ConnectUserStudentActivity : AppCompatActivity() {
         val buttonConnectNext = findViewById<Button>(R.id.buttonConnectNext)
         buttonConnectNext.setOnClickListener{
             val rtmpUrl = "rtmp://158.160.29.10:1935/live/test"
+
             val intent = Intent(this, StreamStudentActivity::class.java)
             intent.putExtra("rtmp_url", rtmpUrl)
             startActivity(intent)
