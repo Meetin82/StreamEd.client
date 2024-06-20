@@ -3,20 +3,18 @@ package com.example.streamed_app.client.activities
 import android.annotation.SuppressLint
 import android.content.Intent
 import android.os.Bundle
+import android.view.View
 import android.widget.Button
 import android.widget.Toast
-import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.streamed_app.R
-import com.example.streamed_app.R.id.recyclerViewCoursesStud
 import com.example.streamed_app.client.models.AddSubscribe
 import com.example.streamed_app.client.network.ApiService
 import com.example.streamed_app.client.network.RetrofitClient
-import com.example.streamed_app.client.network.adapters.CoursesAdapter
 import com.example.streamed_app.client.network.adapters.CoursesAdapterStud
 import com.example.streamed_app.client.network.response.BaseResponse
 import com.example.streamed_app.client.network.response.CourseResponse
@@ -25,10 +23,6 @@ import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 
-private lateinit var apiService: ApiService
-private lateinit var recyclerView: RecyclerView
-@SuppressLint("StaticFieldLeak")
-private lateinit var coursesAdapter: CoursesAdapter
 class CatologCoursesActivity : AppCompatActivity() {
 
     private lateinit var apiService: ApiService
@@ -95,6 +89,7 @@ class CatologCoursesActivity : AppCompatActivity() {
         })
     }
 
+
     private fun subscribeToCourse(courseId: Int) {
         val subscribeRequest = AddSubscribe(courseId)
         apiService.subscribeUser(subscribeRequest).enqueue(object : Callback<BaseResponse> {
@@ -113,11 +108,15 @@ class CatologCoursesActivity : AppCompatActivity() {
         })
     }
 
+
     private fun enableEdgeToEdge() {
-        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main)) { v, insets ->
-            val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
-            v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
-            insets
+        val mainView = findViewById<View>(R.id.recyclerViewCoursesStud)
+        mainView?.let {
+            ViewCompat.setOnApplyWindowInsetsListener(it) { v, insets ->
+                val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
+                v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
+                insets
+            }
         }
     }
 }

@@ -2,7 +2,9 @@
 
 package com.example.streamed_app.client.activities
 
+import android.content.Context
 import android.content.Intent
+import android.media.AudioManager
 import android.os.Bundle
 import android.view.View
 import android.widget.Button
@@ -14,22 +16,37 @@ import androidx.core.view.WindowInsetsCompat
 import com.example.streamed_app.R
 import com.google.android.exoplayer2.ExoPlayer
 import com.google.android.exoplayer2.MediaItem
-import com.google.android.exoplayer2.SimpleExoPlayer
+import com.google.android.exoplayer2.ui.PlayerView
 import com.google.android.exoplayer2.util.Log
 
 class StreamStudentActivity : AppCompatActivity() {
     private lateinit var player: ExoPlayer
+    private lateinit var audioManager: AudioManager
+    private lateinit var audioFocusRequest: AudioManager.OnAudioFocusChangeListener
+    private lateinit var playerView: PlayerView
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
         setContentView(R.layout.activity_stream_student)
+
+        audioManager = getSystemService(Context.AUDIO_SERVICE) as AudioManager
+
+        audioFocusRequest = AudioManager.OnAudioFocusChangeListener { focusChange ->
+            // Здесь можно добавить логику для обработки изменений фокуса аудио
+        }
+
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main)) { v, insets ->
             val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
             insets
         }
+
+        playerView = findViewById(R.id.player_view)
+
         player = ExoPlayer.Builder(this).build()
+
+        playerView.player = player
 
         val editTextSendMsgInChat = findViewById<EditText>(R.id.editTextSendMsgInChat)
         editTextSendMsgInChat.onFocusChangeListener = View.OnFocusChangeListener { v, hasFocus ->
@@ -46,12 +63,13 @@ class StreamStudentActivity : AppCompatActivity() {
 
         val buttonExitFromStream = findViewById<Button>(R.id.buttonExitFromStream)
         buttonExitFromStream.setOnClickListener{
+            player.stop()
+            releaseAudioFocus()
             val intent = Intent(this, ConnectUserStudentActivity::class.java)
             startActivity(intent)
         }
 
-        // Получение URL RTMP из Intent и подготовка проигрывателя
-        val rtmpUrl = intent.getStringExtra("rtmp_url")?: return
+        val rtmpUrl = intent.getStringExtra("rtmp_url") ?: return
         preparePlayer(rtmpUrl)
     }
 
@@ -69,6 +87,10 @@ class StreamStudentActivity : AppCompatActivity() {
     override fun onDestroy() {
         super.onDestroy()
         player.release()
+        releaseAudioFocus()
     }
 
+    private fun releaseAudioFocus() {
+        audioManager.abandonAudioFocus(audioFocusRequest)
+    }
 }

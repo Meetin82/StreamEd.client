@@ -29,25 +29,28 @@ class CoursesAdapterStud(
 
     inner class CourseViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         private val textNameCourse: TextView = itemView.findViewById(R.id.textNameCourse)
-        private val textNameTeacher: TextView = itemView.findViewById(R.id.textNameTeacher)
+//        private val textNameTeacher: TextView = itemView.findViewById(R.id.textNameTeacher)
         private val textDescCourse: TextView = itemView.findViewById(R.id.textDescCourse)
         private val textTimeCourse: TextView = itemView.findViewById(R.id.textTimeCourse)
         private val buttonSubscribe: Button = itemView.findViewById(R.id.buttonSubscribeOnCourse)
         private val imageViewCheck: ImageView = itemView.findViewById(R.id.imageViewCheck)
+        private val textSubscribedMessage: TextView = itemView.findViewById(R.id.textSubscribedMessage)
 
         @SuppressLint("SetTextI18n")
         fun bind(course: CourseResponse) {
             textNameCourse.text = course.name
-            textNameTeacher.text = "${course.name} + ${course.name}"
-            textDescCourse.text = course.description
+//            textNameTeacher.text = course.ownerId.toString() // Измените на корректное значение, если требуется
+            textDescCourse.text = course.theme
             textTimeCourse.text = course.duration
 
             if (course.subscribed) {
                 imageViewCheck.visibility = View.VISIBLE
                 buttonSubscribe.visibility = View.GONE
+                textSubscribedMessage.visibility = View.VISIBLE
             } else {
                 imageViewCheck.visibility = View.GONE
                 buttonSubscribe.visibility = View.VISIBLE
+                textSubscribedMessage.visibility = View.GONE
             }
 
             buttonSubscribe.setOnClickListener {
@@ -58,7 +61,7 @@ class CoursesAdapterStud(
 
     @SuppressLint("NotifyDataSetChanged")
     fun updateCourses(newCourses: List<CourseResponse>) {
-        courses = newCourses
+        courses = newCourses.sortedByDescending { it.subscribed }
         notifyDataSetChanged()
     }
 
@@ -71,7 +74,7 @@ class CoursesAdapterStud(
                 course
             }
         }
-        courses = updatedCourses
+        courses = updatedCourses.sortedByDescending { it.subscribed }
         notifyDataSetChanged()
     }
 }
