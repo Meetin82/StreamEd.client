@@ -9,6 +9,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import com.example.streamed_app.R
+import io.appmetrica.analytics.AppMetrica
 
 class UnloginCoursesActivity : AppCompatActivity() {
     @SuppressLint("MissingInflatedId")
@@ -26,12 +27,14 @@ class UnloginCoursesActivity : AppCompatActivity() {
         buttonUnlogin1.setOnClickListener{
             val intent = Intent(this, LoginUserActivity::class.java)
             startActivity(intent)
+            AppMetrica.reportEvent("screen_login")
         }
 
         val buttonUnlogin2 = findViewById<Button>(R.id.buttonLoginInCourse2)
         buttonUnlogin2.setOnClickListener{
             val intent = Intent(this, LoginUserActivity::class.java)
             startActivity(intent)
+            AppMetrica.reportEvent("screen_login")
         }
     }
 }

@@ -17,6 +17,7 @@ import com.example.streamed_app.R
 import com.example.streamed_app.client.models.RegisterRequest
 import com.example.streamed_app.client.network.response.BaseResponse
 import com.example.streamed_app.client.network.RetrofitClient
+import io.appmetrica.analytics.AppMetrica
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -105,6 +106,7 @@ class RegistrationActivity : AppCompatActivity() {
                             val targetActivity = if (role == "professor") ConnectUserTeacherActivity::class.java else ConnectUserStudentActivity::class.java
                             Log.d("RegistrationActivity", "Role sent to server: $role")
                             val intent = Intent(this@RegistrationActivity, targetActivity)
+                            AppMetrica.reportEvent("registration_complete")
                             startActivity(intent)
                         } else {
                             Toast.makeText(this@RegistrationActivity, baseResponse?.message ?: "Unknown error", Toast.LENGTH_SHORT).show()

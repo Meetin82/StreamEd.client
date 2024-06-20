@@ -8,6 +8,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import com.example.streamed_app.R
+import io.appmetrica.analytics.AppMetrica
 
 class TimetableStudentActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -29,6 +30,7 @@ class TimetableStudentActivity : AppCompatActivity() {
         val buttonCatalog = findViewById<Button>(R.id.buttonCatalog)
         buttonCatalog.setOnClickListener{
             val intent = Intent(this, CatologCoursesActivity::class.java)
+            AppMetrica.reportEvent("screen_courses")
             startActivity(intent)
         }
 

@@ -17,6 +17,7 @@ import com.example.streamed_app.client.network.ApiService
 import com.example.streamed_app.client.network.RetrofitClient
 import com.example.streamed_app.client.network.adapters.WebinarAdapter
 import com.example.streamed_app.client.network.response.WebinarResponse
+import io.appmetrica.analytics.AppMetrica
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -65,12 +66,13 @@ class LessonsUserTeacherActivity : AppCompatActivity() {
         val buttonAddLessonInMyCourses = findViewById<Button>(R.id.buttonAddLessonInMyCourses)
         buttonAddLessonInMyCourses.setOnClickListener{
             val intent = Intent(this, AddingLessonUserTeacherActivity::class.java)
+            AppMetrica.reportEvent("screen_add_class")
             startActivity(intent)
         }
     }
 
     private fun loadWebinars() {
-        apiService.getAllWebinars(courseId = 1).enqueue(object : Callback<List<WebinarResponse>> {
+        apiService.getAllWebinarsForProf().enqueue(object : Callback<List<WebinarResponse>> {
             override fun onResponse(call: Call<List<WebinarResponse>>, response: Response<List<WebinarResponse>>) {
                 if (response.isSuccessful) {
                     val webinars = response.body() ?: emptyList()
@@ -88,7 +90,6 @@ class LessonsUserTeacherActivity : AppCompatActivity() {
                 Log.e("LessonsUserTeacher", "Error: ${t.message}", t)
                 Toast.makeText(this@LessonsUserTeacherActivity, "Error: ${t.message}", Toast.LENGTH_SHORT).show()
             }
-
         })
     }
 }

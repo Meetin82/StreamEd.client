@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:padding="16dp"
+    android:layout_marginTop="8dp"
+    android:layout_marginBottom="8dp"
+    android:layout_marginLeft="35dp"
+    android:layout_marginRight="35dp"
+    android:background="@drawable/rect_course_list_in_my_courses">
+
+    <!-- Ваша разметка для отображения информации о курсе -->
+    <TextView
+        android:id="@+id/textNameCourse"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Название курса"
+        android:textColor="#222227"
+        android:textSize="16sp" />
+
+    <TextView
+        android:id="@+id/textDescCourse"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Направление"
+        android:textColor="#ACACAC"
+        android:textSize="16sp" />
+
+    <TextView
+        android:id="@+id/textNameTeacher"
+        android:layout_width="291dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:text="Имя преподавателя"
+        android:textColor="#222227"
+        android:textSize="16sp" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:layout_marginBottom="8dp"
+        android:gravity="center_vertical">
+
+        <ImageView
+            android:id="@+id/imageViewTimeIcon"
+            android:layout_width="16dp"
+            android:layout_height="16dp"
+            android:layout_marginRight="5dp"
+            android:contentDescription="@null"
+            android:src="@drawable/time" />
+
+        <TextView
+            android:id="@+id/textTimeCourse"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="длит"
+            android:textColor="#ACACAC"
+            android:textSize="16sp" />
+
+        <TextView
+            android:id="@+id/textViewHours"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text=" ч."
+            android:textColor="#ACACAC"
+            android:textSize="16sp" />
+
+    </LinearLayout>
+
+    <Button
+        android:id="@+id/buttonSubscribeOnCourse"
+        android:layout_width="157dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:backgroundTint="#222227"
+        android:text="Подписаться"
+        android:textColor="@android:color/white" />
+
+    <ImageView
+        android:id="@+id/imageViewCheck"
+        android:layout_width="98dp"
+        android:layout_height="228dp"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="@id/buttonSubscribeOnCourse"
+        app:layout_constraintEnd_toEndOf="@id/buttonSubscribeOnCourse"
+        app:layout_constraintStart_toStartOf="@id/buttonSubscribeOnCourse"
+        app:layout_constraintTop_toTopOf="@id/buttonSubscribeOnCourse"
+        app:srcCompat="@drawable/check_galka" />
+
+</LinearLayout>

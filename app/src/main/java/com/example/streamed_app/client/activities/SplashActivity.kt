@@ -15,8 +15,7 @@ class SplashActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         // Creating an extended library configuration.
-        val config = AppMetricaConfig.newConfigBuilder("4c0927d3-d6ee-4339-b66f-83d02c8ac691").build()
-        // Initializing the AppMetrica SDK.
+        val config = AppMetricaConfig.newConfigBuilder("4253b29c-5396-42cc-8339-c12ba9bf9544").build()
         AppMetrica.activate(this, config)
         enableEdgeToEdge()
         setContentView(R.layout.activity_splash)

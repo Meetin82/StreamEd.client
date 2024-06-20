@@ -16,6 +16,7 @@ import com.example.streamed_app.client.models.AddCourseRequest
 import com.example.streamed_app.client.network.ApiService
 import com.example.streamed_app.client.network.RetrofitClient
 import com.example.streamed_app.client.network.response.BaseResponse
+import io.appmetrica.analytics.AppMetrica
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -124,6 +125,7 @@ class CreatingCourseUserTeacherActivity : AppCompatActivity() {
                     if (baseResponse?.success == true) {
                         Toast.makeText(this@CreatingCourseUserTeacherActivity, "Курс успешно создан", Toast.LENGTH_SHORT).show()
                         Log.d("CreateCourse", "Курс успешно создан")
+                        AppMetrica.reportEvent("add_course")
                         finish()
                     } else {
                         Toast.makeText(this@CreatingCourseUserTeacherActivity, baseResponse?.message ?: "Ошибка создания курса", Toast.LENGTH_SHORT).show()

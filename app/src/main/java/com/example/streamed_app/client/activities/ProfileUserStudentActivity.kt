@@ -14,6 +14,7 @@ import com.example.streamed_app.R
 import com.example.streamed_app.client.network.ApiService
 import com.example.streamed_app.client.network.RetrofitClient
 import com.example.streamed_app.client.network.response.UserInfoResponse
+import io.appmetrica.analytics.AppMetrica
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -78,6 +79,7 @@ class ProfileUserStudentActivity : AppCompatActivity() {
         }
 
         findViewById<Button>(R.id.buttonCatalog).setOnClickListener {
+            AppMetrica.reportEvent("screen_courses")
             startActivity(Intent(this, CatologCoursesActivity::class.java))
         }
 

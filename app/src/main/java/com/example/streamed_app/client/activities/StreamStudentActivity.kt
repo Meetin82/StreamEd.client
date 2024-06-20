@@ -18,7 +18,7 @@ import com.google.android.exoplayer2.SimpleExoPlayer
 import com.google.android.exoplayer2.util.Log
 
 class StreamStudentActivity : AppCompatActivity() {
-    private lateinit var player: SimpleExoPlayer
+    private lateinit var player: ExoPlayer
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -29,7 +29,7 @@ class StreamStudentActivity : AppCompatActivity() {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
             insets
         }
-        player = ExoPlayer.Builder(this).build() as SimpleExoPlayer
+        player = ExoPlayer.Builder(this).build()
 
         val editTextSendMsgInChat = findViewById<EditText>(R.id.editTextSendMsgInChat)
         editTextSendMsgInChat.onFocusChangeListener = View.OnFocusChangeListener { v, hasFocus ->
@@ -70,4 +70,5 @@ class StreamStudentActivity : AppCompatActivity() {
         super.onDestroy()
         player.release()
     }
+
 }

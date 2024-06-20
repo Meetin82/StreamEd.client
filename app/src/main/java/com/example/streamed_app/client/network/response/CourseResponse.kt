@@ -7,5 +7,6 @@ data class CourseResponse(
     val theme: String,
     val name: String,
     val description: String,
-    val ownerId: Int
+    val ownerId: Int,
+    val subscribed: Boolean
 )

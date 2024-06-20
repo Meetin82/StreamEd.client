@@ -1,6 +1,7 @@
 package com.example.streamed_app.client.network
 
 import com.example.streamed_app.client.models.AddCourseRequest
+import com.example.streamed_app.client.models.AddSubscribe
 import com.example.streamed_app.client.models.AddWebinarRequest
 import com.example.streamed_app.client.models.LoginRequest
 import com.example.streamed_app.client.models.RegisterRequest
@@ -45,8 +46,11 @@ interface ApiService {
     @DELETE("api/v1/delete-course")
     fun deleteCourse(@Query("id") courseId: Int, @Header("Authorization") jwt: String): Call<BaseResponse>
 
-    @GET("api/v1/get-all-webinars")
-    fun getAllWebinars(@Query("id") courseId: Int): Call<List<WebinarResponse>>
+    @POST("api/v1/subscribe-user")
+    fun subscribeUser(@Body subscribeRequest: AddSubscribe): Call<BaseResponse>
+
+    @GET("api/v1/get-all-webinars-for-prof")
+    fun getAllWebinarsForProf(): Call<List<WebinarResponse>>
 
     @POST("api/v1/create-webinar")
     fun createWebinar(@Header("Authorization") jwt: String, @Body webinarRequest: AddWebinarRequest): Call<BaseResponse>

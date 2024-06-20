@@ -18,6 +18,7 @@ import com.example.streamed_app.client.network.ApiService
 import com.example.streamed_app.client.network.RetrofitClient
 import com.example.streamed_app.client.network.response.BaseResponse
 import com.example.streamed_app.client.network.response.UserInfoResponse
+import io.appmetrica.analytics.AppMetrica
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -56,12 +57,14 @@ class LoginUserActivity : AppCompatActivity() {
         val buttonRegistr = findViewById<Button>(R.id.buttonRegistr)
         buttonRegistr.setOnClickListener {
             val intent = Intent(this, RegistrationActivity::class.java)
+            AppMetrica.reportEvent("screen_registration")
             startActivity(intent)
         }
 
         val buttonForgetPass = findViewById<Button>(R.id.buttonForgetPass)
         buttonForgetPass.setOnClickListener {
             val intent = Intent(this, ForgetPasswordActivity::class.java)
+            AppMetrica.reportEvent("screen_forgot_password")
             startActivity(intent)
         }
 
@@ -107,6 +110,7 @@ class LoginUserActivity : AppCompatActivity() {
                                             Log.d("UserInfoResponse", "User Role: ${userInfo.role}")
                                             val targetActivity = if (userInfo.role == "PROFESSOR") ConnectUserTeacherActivity::class.java else ConnectUserStudentActivity::class.java
                                             val intent = Intent(this@LoginUserActivity, targetActivity)
+                                            AppMetrica.reportEvent("login_succes")
                                             startActivity(intent)
                                         } else {
                                             Toast.makeText(this@LoginUserActivity, "Ошибка получения информации о пользователе", Toast.LENGTH_SHORT).show()

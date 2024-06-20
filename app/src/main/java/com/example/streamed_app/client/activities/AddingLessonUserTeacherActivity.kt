@@ -16,6 +16,7 @@ import com.example.streamed_app.client.network.ApiService
 import com.example.streamed_app.client.network.RetrofitClient
 import com.example.streamed_app.client.network.response.BaseResponse
 import com.example.streamed_app.client.network.response.CourseResponse
+import io.appmetrica.analytics.AppMetrica
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -113,6 +114,7 @@ class AddingLessonUserTeacherActivity : AppCompatActivity() {
         val buttonCourses = findViewById<Button>(R.id.buttonCourses)
         buttonCourses.setOnClickListener {
             val intent = Intent(this, MyCoursesUserTeacherActivity::class.java)
+            AppMetrica.reportEvent("screen_courses")
             startActivity(intent)
         }
 
@@ -160,30 +162,19 @@ class AddingLessonUserTeacherActivity : AppCompatActivity() {
                                 // Обновляем TextView с кодом руководителя
                                 val textCodeMain = findViewById<TextView>(R.id.textCodeMain)
                                 textCodeMain.text = "Код руководителя: $message"
-
-                                // Переход на LessonsUserTeacherActivity
-                                val intent = Intent(this@AddingLessonUserTeacherActivity, LessonsUserTeacherActivity::class.java)
-                                startActivity(intent)
-                                finish() // Закрываем текущую активность, чтобы пользователь не мог вернуться назад
                             } else {
-                                Toast.makeText(
-                                    this@AddingLessonUserTeacherActivity,
-                                    "Failed to create webinar: ${response.message()}",
-                                    Toast.LENGTH_SHORT
-                                ).show()
                                 // Логгирование для отслеживания проблемы
                                 Log.e("API_REQUEST", "Failed to create webinar: ${response.message()}")
                             }
                         } else {
-                            Toast.makeText(
-                                this@AddingLessonUserTeacherActivity,
-                                "Failed to create webinar: ${response.message()}",
-                                Toast.LENGTH_SHORT
-                            ).show()
-                            // Логгирование для отслеживания проблемы
-                            Log.e("API_REQUEST", "Failed to create webinar: ${response.message()}")
                         }
+                        AppMetrica.reportEvent("add_class")
+                        // Переход на LessonsUserTeacherActivity
+                        val intent = Intent(this@AddingLessonUserTeacherActivity, LessonsUserTeacherActivity::class.java)
+                        startActivity(intent)
+                        finish() // Закрываем текущую активность, чтобы пользователь не мог вернуться назад
                     }
+
 
 
 

@@ -16,6 +16,7 @@ import com.example.streamed_app.client.network.ApiService
 import com.example.streamed_app.client.network.RetrofitClient
 import com.example.streamed_app.client.network.adapters.CoursesAdapter
 import com.example.streamed_app.client.network.response.CourseResponse
+import io.appmetrica.analytics.AppMetrica
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -61,6 +62,7 @@ class MyCoursesUserTeacherActivity : AppCompatActivity() {
         }
 
         findViewById<Button>(R.id.buttonAddCourseInMyCourses).setOnClickListener {
+            AppMetrica.reportEvent("screen_add_course")
             startActivity(Intent(this, CreatingCourseUserTeacherActivity::class.java))
         }
     }
