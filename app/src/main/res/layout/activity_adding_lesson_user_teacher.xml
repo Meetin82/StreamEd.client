@@ -180,20 +180,21 @@
         app:layout_constraintVertical_bias="0.0"
         app:srcCompat="@drawable/rect_for_adding_lesson" />
 
-    <EditText
+    <AutoCompleteTextView
         android:id="@+id/editTextNameLesson"
         android:layout_width="250dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="15dp"
         android:ems="10"
         android:inputType="text"
-        android:text="Выберите курс (из списка)"
+        android:text ="Введите название курса"
         android:textColor="#ACACAC"
         app:layout_constraintBottom_toBottomOf="@+id/imageRectForAddingLesson"
         app:layout_constraintEnd_toEndOf="@+id/imageRectForAddingLesson"
         app:layout_constraintStart_toStartOf="@+id/imageRectForAddingLesson"
         app:layout_constraintTop_toTopOf="@+id/imageRectForAddingLesson"
         app:layout_constraintVertical_bias="0.0" />
+
 
     <EditText
         android:id="@+id/editTextDateLesson"

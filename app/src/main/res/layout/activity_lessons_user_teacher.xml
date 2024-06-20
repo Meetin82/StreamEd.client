@@ -8,6 +8,18 @@
     android:background="#222227"
     tools:context=".client.activities.LessonsUserTeacherActivity">
 
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recyclerViewWebinars"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:clipToPadding="false"
+        android:paddingTop="8dp"
+        android:paddingBottom="8dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
     <ImageView
         android:id="@+id/imageLineLowBar"
         android:layout_width="390dp"
@@ -172,19 +184,16 @@
         android:id="@+id/imagePlus"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="15dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageFormCourseList"
-        app:layout_constraintVertical_bias="0.0"
+        app:layout_constraintBottom_toBottomOf="@+id/buttonAddLessonInMyCourses"
+        app:layout_constraintEnd_toEndOf="@+id/buttonAddLessonInMyCourses"
+        app:layout_constraintStart_toStartOf="@+id/buttonAddLessonInMyCourses"
+        app:layout_constraintTop_toTopOf="@+id/buttonAddLessonInMyCourses"
         app:srcCompat="@drawable/add_course_plus" />
 
     <TextView
         android:id="@+id/textAddLesson"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="5dp"
         android:text="Добавить занятие"
         android:textColor="#D8D8D8"
         android:textSize="10dp"
@@ -199,70 +208,70 @@
         android:layout_width="94dp"
         android:layout_height="54dp"
         android:layout_marginTop="13dp"
+        android:layout_marginBottom="7dp"
         android:backgroundTint="#00FFFFFF"
-        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintBottom_toTopOf="@+id/imageLineLowBar"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageFormCourseList"
-        app:layout_constraintVertical_bias="0.0" />
+        app:layout_constraintTop_toBottomOf="@+id/imageFormCourseList" />
 
-    <ImageView
-        android:id="@+id/imageFormCourseList"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="70dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.0"
-        app:srcCompat="@drawable/rect_for_course_list" />
+<!--    <ImageView-->
+<!--        android:id="@+id/imageFormCourseList"-->
+<!--        android:layout_width="wrap_content"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:layout_marginTop="70dp"-->
+<!--        app:layout_constraintBottom_toBottomOf="parent"-->
+<!--        app:layout_constraintEnd_toEndOf="parent"-->
+<!--        app:layout_constraintStart_toStartOf="parent"-->
+<!--        app:layout_constraintTop_toTopOf="parent"-->
+<!--        app:layout_constraintVertical_bias="0.0"-->
+<!--        app:srcCompat="@drawable/rect_for_course_list" />-->
 
-    <TextView
-        android:id="@+id/textDateCourse"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="20dp"
-        android:layout_marginTop="17dp"
-        android:text="10.08.2024 11:00-12:30"
-        android:textColor="#222227"
-        android:textSize="16sp"
-        app:layout_constraintBottom_toBottomOf="@+id/imageFormCourseList"
-        app:layout_constraintEnd_toEndOf="@+id/imageFormCourseList"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="@+id/imageFormCourseList"
-        app:layout_constraintTop_toTopOf="@+id/imageFormCourseList"
-        app:layout_constraintVertical_bias="0.0" />
+<!--    <TextView-->
+<!--        android:id="@+id/textDateCourse"-->
+<!--        android:layout_width="wrap_content"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:layout_marginStart="20dp"-->
+<!--        android:layout_marginTop="17dp"-->
+<!--        android:text="10.08.2024 11:00-12:30"-->
+<!--        android:textColor="#222227"-->
+<!--        android:textSize="16sp"-->
+<!--        app:layout_constraintBottom_toBottomOf="@+id/imageFormCourseList"-->
+<!--        app:layout_constraintEnd_toEndOf="@+id/imageFormCourseList"-->
+<!--        app:layout_constraintHorizontal_bias="0.0"-->
+<!--        app:layout_constraintStart_toStartOf="@+id/imageFormCourseList"-->
+<!--        app:layout_constraintTop_toTopOf="@+id/imageFormCourseList"-->
+<!--        app:layout_constraintVertical_bias="0.0" />-->
 
-    <TextView
-        android:id="@+id/textNamingCourseInList"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="20dp"
-        android:layout_marginTop="10dp"
-        android:text="Курс &quot;Хороший, плохой, злой&quot;"
-        android:textColor="#222227"
-        android:textSize="16sp"
-        app:layout_constraintBottom_toBottomOf="@+id/imageFormCourseList"
-        app:layout_constraintEnd_toEndOf="@+id/imageFormCourseList"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="@+id/imageFormCourseList"
-        app:layout_constraintTop_toBottomOf="@+id/textDateCourse"
-        app:layout_constraintVertical_bias="0.0" />
+<!--    <TextView-->
+<!--        android:id="@+id/textNamingCourseInList"-->
+<!--        android:layout_width="wrap_content"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:layout_marginStart="20dp"-->
+<!--        android:layout_marginTop="10dp"-->
+<!--        android:text="Курс &quot;Хороший, плохой, злой&quot;"-->
+<!--        android:textColor="#222227"-->
+<!--        android:textSize="16sp"-->
+<!--        app:layout_constraintBottom_toBottomOf="@+id/imageFormCourseList"-->
+<!--        app:layout_constraintEnd_toEndOf="@+id/imageFormCourseList"-->
+<!--        app:layout_constraintHorizontal_bias="0.0"-->
+<!--        app:layout_constraintStart_toStartOf="@+id/imageFormCourseList"-->
+<!--        app:layout_constraintTop_toBottomOf="@+id/textDateCourse"-->
+<!--        app:layout_constraintVertical_bias="0.0" />-->
 
-    <TextView
-        android:id="@+id/textCodeMain"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="20dp"
-        android:text="Код руководителя: ******"
-        android:textColor="#222227"
-        android:textSize="16sp"
-        app:layout_constraintBottom_toBottomOf="@+id/imageFormCourseList"
-        app:layout_constraintEnd_toEndOf="@+id/imageFormCourseList"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="@+id/imageFormCourseList"
-        app:layout_constraintTop_toBottomOf="@+id/textNamingCourseInList"
-        app:layout_constraintVertical_bias="0.0" />
+<!--    <TextView-->
+<!--        android:id="@+id/textCodeMain"-->
+<!--        android:layout_width="wrap_content"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:layout_marginStart="20dp"-->
+<!--        android:text="Код руководителя: ******"-->
+<!--        android:textColor="#222227"-->
+<!--        android:textSize="16sp"-->
+<!--        app:layout_constraintBottom_toBottomOf="@+id/imageFormCourseList"-->
+<!--        app:layout_constraintEnd_toEndOf="@+id/imageFormCourseList"-->
+<!--        app:layout_constraintHorizontal_bias="0.0"-->
+<!--        app:layout_constraintStart_toStartOf="@+id/imageFormCourseList"-->
+<!--        app:layout_constraintTop_toBottomOf="@+id/textNamingCourseInList"-->
+<!--        app:layout_constraintVertical_bias="0.0" />-->
 
 </androidx.constraintlayout.widget.ConstraintLayout>

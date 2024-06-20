@@ -3,14 +3,28 @@ package com.example.streamed_app.client.activities
 import android.annotation.SuppressLint
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.widget.Button
+import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.example.streamed_app.R
+import com.example.streamed_app.client.network.ApiService
+import com.example.streamed_app.client.network.RetrofitClient
+import com.example.streamed_app.client.network.adapters.WebinarAdapter
+import com.example.streamed_app.client.network.response.WebinarResponse
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
 
 class LessonsUserTeacherActivity : AppCompatActivity() {
+    private lateinit var recyclerView: RecyclerView
+    private lateinit var adapter: WebinarAdapter
+    private lateinit var apiService: ApiService
     @SuppressLint("MissingInflatedId")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -21,6 +35,14 @@ class LessonsUserTeacherActivity : AppCompatActivity() {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
             insets
         }
+
+        // Инициализация apiService
+        apiService = RetrofitClient.createApiService(this)
+
+        recyclerView = findViewById(R.id.recyclerViewWebinars)
+        recyclerView.layoutManager = LinearLayoutManager(this)
+
+        loadWebinars()
 
         val buttonProfile = findViewById<Button>(R.id.buttonProfile)
         buttonProfile.setOnClickListener{
@@ -45,5 +67,28 @@ class LessonsUserTeacherActivity : AppCompatActivity() {
             val intent = Intent(this, AddingLessonUserTeacherActivity::class.java)
             startActivity(intent)
         }
+    }
+
+    private fun loadWebinars() {
+        apiService.getAllWebinars(courseId = 1).enqueue(object : Callback<List<WebinarResponse>> {
+            override fun onResponse(call: Call<List<WebinarResponse>>, response: Response<List<WebinarResponse>>) {
+                if (response.isSuccessful) {
+                    val webinars = response.body() ?: emptyList()
+                    Log.d("LessonsUserTeacher", "Webinars received: ${webinars.size}")
+                    adapter = WebinarAdapter(webinars)
+                    recyclerView.adapter = adapter
+                } else {
+                    val errorBody = response.errorBody()?.string()
+                    Log.e("LessonsUserTeacher", "Failed to load webinars: $errorBody")
+                    Toast.makeText(this@LessonsUserTeacherActivity, "Failed to load webinars", Toast.LENGTH_SHORT).show()
+                }
+            }
+
+            override fun onFailure(call: Call<List<WebinarResponse>>, t: Throwable) {
+                Log.e("LessonsUserTeacher", "Error: ${t.message}", t)
+                Toast.makeText(this@LessonsUserTeacherActivity, "Error: ${t.message}", Toast.LENGTH_SHORT).show()
+            }
+
+        })
     }
 }

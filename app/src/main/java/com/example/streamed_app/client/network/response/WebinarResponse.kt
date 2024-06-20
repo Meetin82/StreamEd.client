@@ -4,5 +4,6 @@ data class WebinarResponse(
     val id: Int,
     val name: String,
     val date: String,
-    val courseId: Int
+    val courseId: Int,
+    val code: String
 )
