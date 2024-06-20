@@ -5,6 +5,7 @@ import android.app.AlertDialog
 import android.content.Intent
 import android.content.SharedPreferences
 import android.os.Bundle
+import android.util.Log
 import android.widget.Button
 import android.widget.TextView
 import android.widget.Toast
@@ -12,6 +13,7 @@ import androidx.appcompat.app.AppCompatActivity
 import com.example.streamed_app.R
 import com.example.streamed_app.client.network.ApiService
 import com.example.streamed_app.client.network.RetrofitClient
+import com.example.streamed_app.client.network.response.BaseResponse
 import com.example.streamed_app.client.network.response.UserInfoResponse
 import retrofit2.Call
 import retrofit2.Callback
@@ -19,7 +21,6 @@ import retrofit2.Response
 
 @Suppress("DEPRECATION")
 class ProfileUserTeacherActivity : AppCompatActivity() {
-
     companion object {
         private const val REQUEST_CODE_EXIT = 1001
     }
@@ -94,6 +95,11 @@ class ProfileUserTeacherActivity : AppCompatActivity() {
         findViewById<Button>(R.id.buttonExitFromAcc).setOnClickListener {
             showDialogExitConfirmation()
         }
+
+        findViewById<Button>(R.id.buttonDeleteProfile).setOnClickListener {
+            // Показать диалог подтверждения удаления аккаунта
+            showDialogDeleteConfirmation()
+        }
     }
 
     private fun showDialogExitConfirmation() {
@@ -112,6 +118,65 @@ class ProfileUserTeacherActivity : AppCompatActivity() {
             .setNegativeButton(android.R.string.no, null)
             .setIcon(android.R.drawable.ic_dialog_alert)
             .show()
+    }
+
+    private fun showDialogDeleteConfirmation() {
+        AlertDialog.Builder(this)
+            .setTitle("Удаление аккаунта")
+            .setMessage("Вы действительно хотите удалить свой аккаунт? Все данные будут удалены.")
+            .setPositiveButton(android.R.string.yes) { _, _ ->
+                deleteUser()
+            }
+            .setNegativeButton(android.R.string.no, null)
+            .setIcon(android.R.drawable.ic_dialog_alert)
+            .show()
+    }
+
+    private fun deleteUser() {
+        val sharedPreferences = getSharedPreferences("MyAppPrefs", MODE_PRIVATE)
+        val jwtToken = sharedPreferences.getString("JWT_TOKEN", "")
+
+        if (!jwtToken.isNullOrBlank()) {
+            apiService.deleteUser("Bearer $jwtToken").enqueue(object : Callback<String> {
+                override fun onResponse(call: Call<String>, response: Response<String>) {
+                    Log.d("ProfileUserTeacher", "deleteUser onResponse: ${response.code()} ${response.message()}")
+                    handleDeleteUserResponse(response)
+                }
+
+                override fun onFailure(call: Call<String>, t: Throwable) {
+                    Log.e("ProfileUserTeacher", "deleteUser onFailure: ${t.message}", t)
+                    Toast.makeText(this@ProfileUserTeacherActivity, "Ошибка соединения", Toast.LENGTH_SHORT).show()
+                }
+            })
+        } else {
+            Log.e("ProfileUserTeacher", "JWT Token is null or blank")
+            Toast.makeText(this, "Токен не найден", Toast.LENGTH_SHORT).show()
+        }
+    }
+
+    private fun handleDeleteUserResponse(response: Response<String>?) {
+        if (response != null && response.isSuccessful) {
+            val responseBody = response.body()
+            if (responseBody == "User deleted") {
+                val sharedPreferences = getSharedPreferences("MyAppPrefs", MODE_PRIVATE)
+                val editor = sharedPreferences.edit()
+                editor.remove("JWT_TOKEN")
+                editor.apply()
+
+                // Переход на экран входа
+                val intent = Intent(this@ProfileUserTeacherActivity, LoginUserActivity::class.java)
+                intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
+                startActivity(intent)
+
+                Log.d("ProfileUserTeacher", "User deleted. Starting LoginActivity.")
+            } else {
+                Toast.makeText(this, "Не удалось удалить пользователя", Toast.LENGTH_SHORT).show()
+                Log.d("ProfileUserTeacher", "Unexpected response: $responseBody")
+            }
+        } else {
+            Toast.makeText(this, "Не удалось удалить пользователя", Toast.LENGTH_SHORT).show()
+            Log.d("ProfileUserTeacher", "Failed to delete user: ${response?.errorBody()?.string()}")
+        }
     }
 
     @Deprecated("Deprecated in Java")

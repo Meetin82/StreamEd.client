@@ -6,6 +6,7 @@ import okhttp3.Interceptor
 import android.content.Context
 import android.content.SharedPreferences
 import android.util.Log
+import com.example.streamed_app.client.network.utils.ToStringConverterFactory
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 
@@ -20,6 +21,7 @@ object RetrofitClient {
         return Retrofit.Builder()
             .baseUrl(BASE_URL)
             .client(okHttpClient)
+            .addConverterFactory(ToStringConverterFactory())
             .addConverterFactory(GsonConverterFactory.create())
             .build()
             .create(ApiService::class.java)

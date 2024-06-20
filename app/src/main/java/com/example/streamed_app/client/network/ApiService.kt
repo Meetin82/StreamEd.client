@@ -4,6 +4,7 @@ import com.example.streamed_app.client.models.AddCourseRequest
 import com.example.streamed_app.client.models.AddWebinarRequest
 import com.example.streamed_app.client.models.LoginRequest
 import com.example.streamed_app.client.models.RegisterRequest
+import com.example.streamed_app.client.models.UpdUserRequest
 import com.example.streamed_app.client.network.response.BaseResponse
 import com.example.streamed_app.client.network.response.CourseResponse
 import com.example.streamed_app.client.network.response.UserInfoResponse
@@ -26,6 +27,11 @@ interface ApiService {
 
     @GET("api/v1/get-user-info")
     fun getUserInfo(@Header("Authorization") jwt: String): Call<UserInfoResponse>
+
+    @POST("api/v1/upd-user")
+    fun updateUser(@Header("Authorization") jwt: String, @Body user: UpdUserRequest): Call<BaseResponse>
+    @POST("api/v1/delete-user")
+    fun deleteUser(@Header("Authorization") jwt: String): Call<String>
 
     @GET("api/v1/get-all-courses")
     fun getAllCourses(): Call<List<CourseResponse>>

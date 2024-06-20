@@ -1,58 +1,74 @@
 package com.example.streamed_app.client.activities
 
-import android.annotation.SuppressLint
 import android.content.Intent
 import android.os.Bundle
-import android.view.View
 import android.widget.Button
 import android.widget.EditText
-import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.view.ViewCompat
-import androidx.core.view.WindowInsetsCompat
 import com.example.streamed_app.R
+import com.example.streamed_app.client.models.UpdUserRequest
+import com.example.streamed_app.client.network.RetrofitClient
+import com.example.streamed_app.client.network.ApiService
+import com.example.streamed_app.client.network.response.BaseResponse
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
 
 class EditingProfileUserActivity : AppCompatActivity() {
-    @SuppressLint("MissingInflatedId")
+    private lateinit var apiService: ApiService
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        enableEdgeToEdge()
         setContentView(R.layout.activity_editing_profile_user)
-        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main)) { v, insets ->
-            val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
-            v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
-            insets
-        }
+
+        apiService = RetrofitClient.createApiService(this)
 
         val editTextNameForEditting = findViewById<EditText>(R.id.editTextNameForEditting)
-        editTextNameForEditting.onFocusChangeListener = View.OnFocusChangeListener { v, hasFocus ->
-            if (hasFocus) {
-                (v as EditText).text.clear()
-            }
-        }
-
         val editTextSurnameForEditting = findViewById<EditText>(R.id.editTextSurnameForEditting)
-        editTextSurnameForEditting.onFocusChangeListener = View.OnFocusChangeListener { v, hasFocus ->
-            if (hasFocus) {
-                (v as EditText).text.clear()
-            }
-        }
-
         val editTextMailForEditting = findViewById<EditText>(R.id.editTextMailForEditting)
-        editTextMailForEditting.onFocusChangeListener = View.OnFocusChangeListener { v, hasFocus ->
-            if (hasFocus) {
-                (v as EditText).text.clear()
-            }
-        }
 
         val buttonEditProfileInEdittingPage = findViewById<Button>(R.id.buttonEditProfileInEdittingPage)
-        buttonEditProfileInEdittingPage.setOnClickListener{
-            val intent = Intent(this, ProfileUserStudentActivity::class.java)
-            startActivity(intent)
+        buttonEditProfileInEdittingPage.setOnClickListener {
+            val name = editTextNameForEditting.text.toString()
+            val surname = editTextSurnameForEditting.text.toString()
+            val email = editTextMailForEditting.text.toString()
+
+            val updUserRequest = UpdUserRequest(name, surname, email)
+
+            // Получаем JWT токен из SharedPreferences
+            val sharedPreferences = getSharedPreferences("MyAppPrefs", MODE_PRIVATE)
+            val jwtToken = sharedPreferences.getString("JWT_TOKEN", "")
+
+            if (!jwtToken.isNullOrBlank()) {
+                // Выполняем запрос на обновление профиля
+                apiService.updateUser("Bearer $jwtToken", updUserRequest).enqueue(object : Callback<BaseResponse> {
+                    override fun onResponse(call: Call<BaseResponse>, response: Response<BaseResponse>) {
+                        if (response.isSuccessful && response.body()?.success == true) {
+                            val newJwtToken = response.headers()["Authorization"]?.removePrefix("Bearer ")
+                            if (!newJwtToken.isNullOrBlank()) {
+                                sharedPreferences.edit().putString("JWT_TOKEN", newJwtToken).apply()
+                            }
+                            val intent = Intent(this@EditingProfileUserActivity, LoginUserActivity::class.java)
+                            startActivity(intent)
+                        } else {
+                            // Обработка ошибки
+                            // Например, вывод сообщения об ошибке
+                        }
+                    }
+
+                    override fun onFailure(call: Call<BaseResponse>, t: Throwable) {
+                        // Обработка ошибки
+                        // Например, вывод сообщения об ошибке
+                    }
+                })
+            } else {
+                // JWT токен не найден или пустой, возможно пользователь не авторизован
+                // Обработка ситуации, например, перенаправление на страницу авторизации
+            }
         }
 
         val buttonBack = findViewById<Button>(R.id.buttonBack)
-        buttonBack.setOnClickListener{
+        buttonBack.setOnClickListener {
             val intent = Intent(this, ProfileUserStudentActivity::class.java)
             startActivity(intent)
         }
