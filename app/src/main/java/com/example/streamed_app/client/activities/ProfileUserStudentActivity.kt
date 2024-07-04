@@ -34,10 +34,8 @@ class ProfileUserStudentActivity : AppCompatActivity() {
 
         apiService = RetrofitClient.createApiService(this)
 
-        // Получение информации о студенте и обновление UI
         getStudentInfoAndUpdateUI()
 
-        // Настройка кнопок для перехода на другие активити
         setupButtons()
     }
 
@@ -70,7 +68,6 @@ class ProfileUserStudentActivity : AppCompatActivity() {
         findViewById<TextView>(R.id.textNameInMyProfile).text = userInfo.name
         findViewById<TextView>(R.id.textSurnameInMyProfile2).text = userInfo.surname
         findViewById<TextView>(R.id.textEmailInMyProfile).text = "E-mail: ${userInfo.email}"
-        // Добавьте другие поля, если нужно
     }
 
     private fun setupButtons() {
@@ -100,7 +97,6 @@ class ProfileUserStudentActivity : AppCompatActivity() {
         }
 
         findViewById<Button>(R.id.buttonDeleteProfile).setOnClickListener {
-            // Показать диалог подтверждения удаления аккаунта
             showDialogDeleteConfirmation()
         }
     }
@@ -142,17 +138,14 @@ class ProfileUserStudentActivity : AppCompatActivity() {
         if (!jwtToken.isNullOrBlank()) {
             apiService.deleteUser("Bearer $jwtToken").enqueue(object : Callback<String> {
                 override fun onResponse(call: Call<String>, response: Response<String>) {
-                    Log.d("ProfileUserStudent", "deleteUser onResponse: ${response.code()} ${response.message()}")
                     handleDeleteUserResponse(response)
                 }
 
                 override fun onFailure(call: Call<String>, t: Throwable) {
-                    Log.e("ProfileUserStudent", "deleteUser onFailure: ${t.message}", t)
                     Toast.makeText(this@ProfileUserStudentActivity, "Ошибка соединения", Toast.LENGTH_SHORT).show()
                 }
             })
         } else {
-            Log.e("ProfileUserStudent", "JWT Token is null or blank")
             Toast.makeText(this, "Токен не найден", Toast.LENGTH_SHORT).show()
         }
     }
@@ -166,19 +159,14 @@ class ProfileUserStudentActivity : AppCompatActivity() {
                 editor.remove("JWT_TOKEN")
                 editor.apply()
 
-                // Переход на экран входа
                 val intent = Intent(this@ProfileUserStudentActivity, LoginUserActivity::class.java)
                 intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
                 startActivity(intent)
-
-                Log.d("ProfileUserStudent", "User deleted. Starting LoginActivity.")
             } else {
                 Toast.makeText(this, "Не удалось удалить пользователя", Toast.LENGTH_SHORT).show()
-                Log.d("ProfileUserStudent", "Unexpected response: $responseBody")
             }
         } else {
             Toast.makeText(this, "Не удалось удалить пользователя", Toast.LENGTH_SHORT).show()
-            Log.d("ProfileUserStudent", "Failed to delete user: ${response?.errorBody()?.string()}")
         }
     }
 
@@ -186,7 +174,6 @@ class ProfileUserStudentActivity : AppCompatActivity() {
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
         if (requestCode == REQUEST_CODE_EXIT) {
-            // Действия после выхода из аккаунта
         }
     }
 }

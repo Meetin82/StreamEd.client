@@ -7,6 +7,7 @@ import android.content.Context
 import android.content.SharedPreferences
 import android.util.Log
 import com.example.streamed_app.client.network.utils.ToStringConverterFactory
+import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 
@@ -14,8 +15,18 @@ object RetrofitClient {
     private const val BASE_URL = "http://158.160.29.10:8080/"
 
     fun createApiService(context: Context): ApiService {
+        val loggingInterceptor = HttpLoggingInterceptor { message ->
+            Log.d(
+                "OkHttp",
+                message
+            )
+        }.apply {
+            level = HttpLoggingInterceptor.Level.BODY
+        }
+
         val okHttpClient = OkHttpClient.Builder()
             .addInterceptor(JwtInterceptor(context))
+            .addInterceptor(loggingInterceptor)
             .build()
 
         return Retrofit.Builder()
@@ -43,5 +54,6 @@ class JwtInterceptor(private val context: Context) : Interceptor {
         return chain.proceed(request)
     }
 }
+
 
 

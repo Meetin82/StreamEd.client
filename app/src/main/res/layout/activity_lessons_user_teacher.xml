@@ -6,6 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#222227"
+    tools:ignore="all"
     tools:context=".client.activities.LessonsUserTeacherActivity">
 
     <androidx.recyclerview.widget.RecyclerView
@@ -18,7 +19,8 @@
         app:layout_constraintBottom_toTopOf="@+id/buttonAddLessonInMyCourses"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        tools:listitem="@layout/item_webinar"/>
 
     <ImageView
         android:id="@+id/imageLineLowBar"

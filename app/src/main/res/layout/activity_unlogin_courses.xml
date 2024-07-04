@@ -6,182 +6,20 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#222227"
+    tools:ignore="all"
     tools:context=".client.activities.UnloginCoursesActivity">
 
-    <ImageView
-        android:id="@+id/imageRectUnlogin1"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="72dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.492"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/rectangle_unlogin" />
-
-    <ImageView
-        android:id="@+id/imageRectUnlogin2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recyclerViewCoursesForUnlogin"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:clipToPadding="false"
+        android:paddingTop="8dp"
+        android:paddingBottom="8dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.492"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageRectUnlogin1"
-        app:layout_constraintVertical_bias="0.0"
-        app:srcCompat="@drawable/rectangle_unlogin" />
-
-    <Button
-        android:id="@+id/buttonLoginInCourse1"
-        android:layout_width="116dp"
-        android:layout_height="45dp"
-        android:backgroundTint="#222227"
-        android:text="Войти"
-        android:textColorLink="#222227"
-        app:layout_constraintBottom_toBottomOf="@+id/imageRectUnlogin1"
-        app:layout_constraintEnd_toEndOf="@+id/imageRectUnlogin1"
-        app:layout_constraintHorizontal_bias="0.097"
-        app:layout_constraintStart_toStartOf="@+id/imageRectUnlogin1"
-        app:layout_constraintTop_toTopOf="@+id/imageRectUnlogin1"
-        app:layout_constraintVertical_bias="0.884" />
-
-    <Button
-        android:id="@+id/buttonLoginInCourse2"
-        android:layout_width="116dp"
-        android:layout_height="45dp"
-        android:backgroundTint="#222227"
-        android:text="Войти"
-        app:layout_constraintBottom_toBottomOf="@+id/imageRectUnlogin2"
-        app:layout_constraintEnd_toEndOf="@+id/imageRectUnlogin2"
-        app:layout_constraintHorizontal_bias="0.097"
-        app:layout_constraintStart_toStartOf="@+id/imageRectUnlogin2"
-        app:layout_constraintTop_toTopOf="@+id/imageRectUnlogin2"
-        app:layout_constraintVertical_bias="0.859" />
-
-    <TextView
-        android:id="@+id/textDescCourseInUnlogin1"
-        android:layout_width="225dp"
-        android:layout_height="19dp"
-        android:text="C++"
-        android:textColor="#808080"
-        app:layout_constraintBottom_toBottomOf="@+id/imageRectUnlogin1"
-        app:layout_constraintEnd_toEndOf="@+id/imageRectUnlogin1"
-        app:layout_constraintHorizontal_bias="0.206"
-        app:layout_constraintStart_toStartOf="@+id/imageRectUnlogin1"
-        app:layout_constraintTop_toBottomOf="@+id/textNameCourseInUnlogin1"
-        app:layout_constraintVertical_bias="0.012" />
-
-    <TextView
-        android:id="@+id/textNameCourseInUnlogin2"
-        android:layout_width="225dp"
-        android:layout_height="19dp"
-        android:text="Прогаем змейку"
-        app:layout_constraintBottom_toBottomOf="@+id/imageRectUnlogin2"
-        app:layout_constraintEnd_toEndOf="@+id/imageRectUnlogin2"
-        app:layout_constraintHorizontal_bias="0.206"
-        app:layout_constraintStart_toStartOf="@+id/imageRectUnlogin2"
-        app:layout_constraintTop_toTopOf="@+id/imageRectUnlogin2"
-        app:layout_constraintVertical_bias="0.163" />
-
-    <TextView
-        android:id="@+id/textNameCourseInUnlogin1"
-        android:layout_width="225dp"
-        android:layout_height="19dp"
-        android:text="Хороший, плохой, злой"
-        app:layout_constraintBottom_toBottomOf="@+id/imageRectUnlogin1"
-        app:layout_constraintEnd_toEndOf="@+id/imageRectUnlogin1"
-        app:layout_constraintHorizontal_bias="0.206"
-        app:layout_constraintStart_toStartOf="@+id/imageRectUnlogin1"
-        app:layout_constraintTop_toTopOf="@+id/imageRectUnlogin1"
-        app:layout_constraintVertical_bias="0.156" />
-
-    <TextView
-        android:id="@+id/textDescCourseInUnlogin2"
-        android:layout_width="225dp"
-        android:layout_height="19dp"
-        android:text="Python"
-        android:textColor="#808080"
-        app:layout_constraintBottom_toBottomOf="@+id/imageRectUnlogin2"
-        app:layout_constraintEnd_toEndOf="@+id/imageRectUnlogin2"
-        app:layout_constraintHorizontal_bias="0.206"
-        app:layout_constraintStart_toStartOf="@+id/imageRectUnlogin2"
-        app:layout_constraintTop_toBottomOf="@+id/textNameCourseInUnlogin2"
-        app:layout_constraintVertical_bias="0.0" />
-
-    <ImageView
-        android:id="@+id/imageTime"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="148dp"
-        app:layout_constraintBottom_toBottomOf="@+id/imageRectUnlogin2"
-        app:layout_constraintEnd_toEndOf="@+id/imageRectUnlogin2"
-        app:layout_constraintHorizontal_bias="0.928"
-        app:layout_constraintStart_toEndOf="@+id/buttonLoginInCourse1"
-        app:layout_constraintTop_toTopOf="@+id/imageRectUnlogin2"
-        app:layout_constraintVertical_bias="0.88"
-        app:srcCompat="@drawable/time" />
-
-    <ImageView
-        android:id="@+id/imageTime2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:layout_constraintBottom_toBottomOf="@+id/imageRectUnlogin1"
-        app:layout_constraintEnd_toEndOf="@+id/imageRectUnlogin1"
-        app:layout_constraintHorizontal_bias="0.08"
-        app:layout_constraintStart_toEndOf="@+id/buttonLoginInCourse1"
-        app:layout_constraintTop_toTopOf="@+id/imageRectUnlogin1"
-        app:layout_constraintVertical_bias="0.901"
-        app:srcCompat="@drawable/time" />
-
-    <TextView
-        android:id="@+id/textTimeCourse1"
-        android:layout_width="25dp"
-        android:layout_height="19dp"
-        android:text="7 ч."
-        android:textColor="#808080"
-        app:layout_constraintBottom_toBottomOf="@+id/imageRectUnlogin1"
-        app:layout_constraintEnd_toEndOf="@+id/imageRectUnlogin1"
-        app:layout_constraintHorizontal_bias="0.609"
-        app:layout_constraintStart_toStartOf="@+id/imageRectUnlogin1"
-        app:layout_constraintTop_toBottomOf="@+id/textNameCourseInUnlogin1"
-        app:layout_constraintVertical_bias="0.885" />
-
-    <TextView
-        android:id="@+id/textTimeCourse2"
-        android:layout_width="25dp"
-        android:layout_height="19dp"
-        android:text="3 ч."
-        android:textColor="#808080"
-        app:layout_constraintBottom_toBottomOf="@+id/imageRectUnlogin2"
-        app:layout_constraintEnd_toEndOf="@+id/imageRectUnlogin2"
-        app:layout_constraintHorizontal_bias="0.064"
-        app:layout_constraintStart_toEndOf="@+id/imageTime"
-        app:layout_constraintTop_toTopOf="@+id/imageRectUnlogin2"
-        app:layout_constraintVertical_bias="0.884" />
-
-    <TextView
-        android:id="@+id/textNameTeacher1"
-        android:layout_width="100dp"
-        android:layout_height="19dp"
-        android:text="Иван Иванов"
-        app:layout_constraintBottom_toBottomOf="@+id/imageRectUnlogin1"
-        app:layout_constraintEnd_toEndOf="@+id/imageRectUnlogin1"
-        app:layout_constraintHorizontal_bias="1.0"
-        app:layout_constraintStart_toStartOf="@+id/imageRectUnlogin1"
-        app:layout_constraintTop_toTopOf="@+id/imageRectUnlogin1"
-        app:layout_constraintVertical_bias="0.789" />
-
-    <TextView
-        android:id="@+id/textNameTeacher2"
-        android:layout_width="140dp"
-        android:layout_height="19dp"
-        android:text="Андрей Андреевич"
-        app:layout_constraintBottom_toBottomOf="@+id/imageRectUnlogin2"
-        app:layout_constraintEnd_toEndOf="@+id/imageRectUnlogin2"
-        app:layout_constraintHorizontal_bias="1.0"
-        app:layout_constraintStart_toStartOf="@+id/imageRectUnlogin2"
-        app:layout_constraintTop_toTopOf="@+id/imageRectUnlogin2"
-        app:layout_constraintVertical_bias="0.755" />
+        app:layout_constraintTop_toTopOf="parent"
+        tools:listitem="@layout/item_course_for_unlogin" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

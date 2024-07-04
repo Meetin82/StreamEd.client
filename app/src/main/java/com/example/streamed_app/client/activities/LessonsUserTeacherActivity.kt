@@ -37,7 +37,6 @@ class LessonsUserTeacherActivity : AppCompatActivity() {
             insets
         }
 
-        // Инициализация apiService
         apiService = RetrofitClient.createApiService(this)
 
         recyclerView = findViewById(R.id.recyclerViewWebinars)
@@ -76,18 +75,14 @@ class LessonsUserTeacherActivity : AppCompatActivity() {
             override fun onResponse(call: Call<List<WebinarResponse>>, response: Response<List<WebinarResponse>>) {
                 if (response.isSuccessful) {
                     val webinars = response.body() ?: emptyList()
-                    Log.d("LessonsUserTeacher", "Webinars received: ${webinars.size}")
                     adapter = WebinarAdapter(webinars)
                     recyclerView.adapter = adapter
                 } else {
-                    val errorBody = response.errorBody()?.string()
-                    Log.e("LessonsUserTeacher", "Failed to load webinars: $errorBody")
                     Toast.makeText(this@LessonsUserTeacherActivity, "Failed to load webinars", Toast.LENGTH_SHORT).show()
                 }
             }
 
             override fun onFailure(call: Call<List<WebinarResponse>>, t: Throwable) {
-                Log.e("LessonsUserTeacher", "Error: ${t.message}", t)
                 Toast.makeText(this@LessonsUserTeacherActivity, "Error: ${t.message}", Toast.LENGTH_SHORT).show()
             }
         })

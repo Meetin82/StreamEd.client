@@ -4,7 +4,6 @@ import android.annotation.SuppressLint
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
-import android.view.View
 import android.widget.Button
 import android.widget.EditText
 import android.widget.Toast
@@ -23,6 +22,7 @@ import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 
+@Suppress("DEPRECATION")
 class LoginUserActivity : AppCompatActivity() {
     @SuppressLint("MissingInflatedId")
     private lateinit var apiService: ApiService
@@ -41,18 +41,11 @@ class LoginUserActivity : AppCompatActivity() {
         apiService = RetrofitClient.createApiService(this)
 
         val editTextTextEmailAddress = findViewById<EditText>(R.id.editTextTextEmailAddress)
-        editTextTextEmailAddress.onFocusChangeListener = View.OnFocusChangeListener { v, hasFocus ->
-            if (hasFocus) {
-                (v as EditText).text.clear()
-            }
-        }
 
         val editTextTextPassword = findViewById<EditText>(R.id.editTextTextPassword)
-        editTextTextPassword.onFocusChangeListener = View.OnFocusChangeListener { v, hasFocus ->
-            if (hasFocus) {
-                (v as EditText).text.clear()
-            }
-        }
+
+        setEditTextFocusListener(editTextTextEmailAddress, "Эл. почта")
+        setEditTextFocusListener(editTextTextPassword, "Пароль", isPassword = true)
 
         val buttonRegistr = findViewById<Button>(R.id.buttonRegistr)
         buttonRegistr.setOnClickListener {
@@ -73,32 +66,25 @@ class LoginUserActivity : AppCompatActivity() {
             val email = findViewById<EditText>(R.id.editTextTextEmailAddress).text.toString()
             val password = findViewById<EditText>(R.id.editTextTextPassword).text.toString()
 
-            Log.d("LoginData", "Email: $email, Password: $password")
-
             val loginRequest = LoginRequest(email, password)
 
             apiService.loginUser(loginRequest).enqueue(object : Callback<BaseResponse> {
                 override fun onResponse(call: Call<BaseResponse>, response: Response<BaseResponse>) {
-                    Log.d("LoginResponse", "Status Code: ${response.code()}, Success: ${response.isSuccessful}, Message: ${response.message()}")
 
                     if (response.isSuccessful) {
                         val baseResponse = response.body()
                         if (baseResponse?.success == true) {
                             val jwtToken = baseResponse.message ?: ""
-                            Log.d("LoginSuccess", "JWT Token: $jwtToken")
 
                             val sharedPreferences = getSharedPreferences("MyAppPrefs", MODE_PRIVATE)
                             val editor = sharedPreferences.edit()
                             editor.putString("JWT_TOKEN", jwtToken)
                             editor.apply()
 
-                            // Пересоздайте apiService с новым токеном
                             apiService = RetrofitClient.createApiService(this@LoginUserActivity)
 
                             apiService.getUserInfo("Bearer $jwtToken").enqueue(object : Callback<UserInfoResponse> {
                                 override fun onResponse(call: Call<UserInfoResponse>, response: Response<UserInfoResponse>) {
-                                    Log.d("UserInfoResponse", "Status Code: ${response.code()}, Success: ${response.isSuccessful}, Message: ${response.message()}")
-
                                     if (response.isSuccessful) {
                                         val userInfo = response.body()
 
@@ -106,6 +92,8 @@ class LoginUserActivity : AppCompatActivity() {
                                             editor.putString("USER_NAME", userInfo.name)
                                             editor.apply()
                                             editor.putString("USER_SURNAME", userInfo.surname)
+                                            editor.apply()
+                                            editor.putString("USER_ROLE", userInfo.role)
                                             editor.apply()
                                             Log.d("UserInfoResponse", "User Role: ${userInfo.role}")
                                             val targetActivity = if (userInfo.role == "PROFESSOR") ConnectUserTeacherActivity::class.java else ConnectUserStudentActivity::class.java
@@ -121,7 +109,6 @@ class LoginUserActivity : AppCompatActivity() {
                                 }
 
                                 override fun onFailure(call: Call<UserInfoResponse>, t: Throwable) {
-                                    Log.e("NetworkError", "Ошибка соединения: ${t.message}", t)
                                     Toast.makeText(this@LoginUserActivity, "Ошибка соединения", Toast.LENGTH_SHORT).show()
                                 }
                             })
@@ -129,7 +116,7 @@ class LoginUserActivity : AppCompatActivity() {
                             Toast.makeText(this@LoginUserActivity, baseResponse?.message ?: "Неизвестная ошибка", Toast.LENGTH_SHORT).show()
                         }
                     } else {
-                        Toast.makeText(this@LoginUserActivity, "Ошибка сервера", Toast.LENGTH_SHORT).show()
+                        Toast.makeText(this@LoginUserActivity, "Неправильно введён логин или пароль", Toast.LENGTH_SHORT).show()
                     }
                 }
 
@@ -138,6 +125,24 @@ class LoginUserActivity : AppCompatActivity() {
                     Toast.makeText(this@LoginUserActivity, "Ошибка соединения", Toast.LENGTH_SHORT).show()
                 }
             })
+        }
+    }
+
+    private fun setEditTextFocusListener(editText: EditText, hint: String, isPassword: Boolean = false) {
+        editText.setOnFocusChangeListener { v, hasFocus ->
+            if (hasFocus && editText.text.toString() == hint) {
+                editText.setText("")
+                editText.setTextColor(resources.getColor(android.R.color.black))
+                if (isPassword) {
+                    editText.inputType = android.text.InputType.TYPE_CLASS_TEXT or android.text.InputType.TYPE_TEXT_VARIATION_PASSWORD
+                }
+            } else if (!hasFocus && editText.text.toString().isEmpty()) {
+                editText.setText(hint)
+                editText.setTextColor(resources.getColor(android.R.color.darker_gray))
+                if (isPassword) {
+                    editText.inputType = android.text.InputType.TYPE_CLASS_TEXT
+                }
+            }
         }
     }
 }

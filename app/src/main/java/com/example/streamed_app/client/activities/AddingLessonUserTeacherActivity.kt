@@ -50,7 +50,6 @@ class AddingLessonUserTeacherActivity : AppCompatActivity() {
     private fun setupViews() {
         editTextNameLesson = findViewById(R.id.editTextNameLesson)
         editTextDateLesson = findViewById(R.id.editTextDateLesson)
-//        editTextDateLesson2 = findViewById(R.id.editTextDateLesson2)
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main)) { v, insets ->
             val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
@@ -59,23 +58,8 @@ class AddingLessonUserTeacherActivity : AppCompatActivity() {
     }
 
     private fun setupListeners() {
-        editTextNameLesson.onFocusChangeListener = View.OnFocusChangeListener { v, hasFocus ->
-            if (hasFocus) {
-                (v as EditText).text.clear()
-            }
-        }
-
-        editTextDateLesson.onFocusChangeListener = View.OnFocusChangeListener { v, hasFocus ->
-            if (hasFocus) {
-                (v as EditText).text.clear()
-            }
-        }
-
-//        editTextDateLesson2.onFocusChangeListener = View.OnFocusChangeListener { v, hasFocus ->
-//            if (hasFocus) {
-//                (v as EditText).text.clear()
-//            }
-//        }
+        setEditTextFocusListener(editTextNameLesson, "Введите название курса")
+        setEditTextFocusListener(editTextDateLesson, "Дата и время")
 
         findViewById<Button>(R.id.buttonProfile).setOnClickListener {
             startActivity(Intent(this, ProfileUserTeacherActivity::class.java))
@@ -153,21 +137,12 @@ class AddingLessonUserTeacherActivity : AppCompatActivity() {
         val jwtToken = sharedPreferences.getString("JWT_TOKEN", "") ?: ""
 
         apiService.createWebinar(jwtToken, webinarRequest)
-            .enqueue(object : Callback<BaseResponse> {
-                override fun onResponse(call: Call<BaseResponse>, response: Response<BaseResponse>) {
-                    Log.d("API_REQUEST", "Response code: ${response.code()}")
-                    Log.d("API_REQUEST", "Response body: ${response.body()}")
+            .enqueue(object : Callback<String> {
+                override fun onResponse(call: Call<String>, response: Response<String>) {
                     if (response.isSuccessful) {
                         val body = response.body()
-                        if (body != null && body.success == true) {
-                            val message = body.message ?: "Webinar created successfully"
-
-                            Toast.makeText(
-                                this@AddingLessonUserTeacherActivity,
-                                message,
-                                Toast.LENGTH_LONG
-                            ).show()
-
+                        if (body != null) {
+                            val message = body.toString() ?: "Webinar created successfully"
                             findViewById<TextView>(R.id.textCodeMain)?.apply {
                                 text = "Код руководителя: $message"
                             }
@@ -180,7 +155,7 @@ class AddingLessonUserTeacherActivity : AppCompatActivity() {
                     finish()
                 }
 
-                override fun onFailure(call: Call<BaseResponse>, t: Throwable) {
+                override fun onFailure(call: Call<String>, t: Throwable) {
                     Toast.makeText(
                         this@AddingLessonUserTeacherActivity,
                         "Error: ${t.message}",
@@ -189,5 +164,23 @@ class AddingLessonUserTeacherActivity : AppCompatActivity() {
                     Log.e("API_REQUEST", "Error: ${t.message}", t)
                 }
             })
+    }
+
+    private fun setEditTextFocusListener(editText: EditText, hint: String, isPassword: Boolean = false) {
+        editText.setOnFocusChangeListener { v, hasFocus ->
+            if (hasFocus && editText.text.toString() == hint) {
+                editText.setText("")
+                editText.setTextColor(resources.getColor(android.R.color.black))
+                if (isPassword) {
+                    editText.inputType = android.text.InputType.TYPE_CLASS_TEXT or android.text.InputType.TYPE_TEXT_VARIATION_PASSWORD
+                }
+            } else if (!hasFocus && editText.text.toString().isEmpty()) {
+                editText.setText(hint)
+                editText.setTextColor(resources.getColor(android.R.color.darker_gray))
+                if (isPassword) {
+                    editText.inputType = android.text.InputType.TYPE_CLASS_TEXT
+                }
+            }
+        }
     }
 }

@@ -1,15 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    xmlns:tools="http://schemas.android.com/tools"
     android:orientation="vertical"
     android:padding="16dp"
     android:layout_marginTop="8dp"
     android:layout_marginBottom="8dp"
     android:layout_marginLeft="35dp"
     android:layout_marginRight="35dp"
-    android:background="@drawable/rect_course_list_in_my_courses">
+    android:background="@drawable/rect_course_list_in_my_courses"
+    tools:ignore="all">
+
 
     <TextView
         android:id="@+id/textNameCourse"
@@ -26,15 +28,6 @@
         android:text="Направление"
         android:textColor="#ACACAC"
         android:textSize="16sp" />
-
-<!--    <TextView-->
-<!--        android:id="@+id/textNameTeacher"-->
-<!--        android:layout_width="291dp"-->
-<!--        android:layout_height="wrap_content"-->
-<!--        android:layout_weight="1"-->
-<!--        android:text="Имя преподавателя"-->
-<!--        android:textColor="#222227"-->
-<!--        android:textSize="16sp" />-->
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -77,22 +70,5 @@
         android:backgroundTint="#222227"
         android:text="Подписаться"
         android:textColor="@android:color/white" />
-
-    <ImageView
-        android:id="@+id/imageViewCheck"
-        android:layout_width="98dp"
-        android:layout_height="98dp"
-        android:layout_gravity="center"
-        android:visibility="gone"
-        app:srcCompat="@drawable/check_galka" />
-
-    <TextView
-        android:id="@+id/textSubscribedMessage"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Вы подписаны на курс"
-        android:textColor="#4CAF50"
-        android:textSize="16sp"
-        android:visibility="gone" />
 
 </LinearLayout>

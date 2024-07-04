@@ -2,13 +2,15 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    xmlns:tools="http://schemas.android.com/tools"
     android:orientation="vertical"
     android:padding="16dp"
     android:layout_marginTop="8dp"
     android:layout_marginBottom="8dp"
     android:layout_marginLeft="35dp"
     android:layout_marginRight="35dp"
-    android:background="@drawable/rect_course_list_in_my_courses">
+    android:background="@drawable/rect_course_list_in_my_courses"
+    tools:ignore="all">
 
     <!-- Ваша разметка для отображения информации о курсе -->
     <TextView

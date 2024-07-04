@@ -21,6 +21,7 @@ import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 
+@Suppress("DEPRECATION")
 class CreatingCourseUserTeacherActivity : AppCompatActivity() {
 
     private lateinit var apiService: ApiService
@@ -38,32 +39,14 @@ class CreatingCourseUserTeacherActivity : AppCompatActivity() {
 
 
         val editTextNameCourse = findViewById<EditText>(R.id.editTextNameCourse)
-        editTextNameCourse.onFocusChangeListener = View.OnFocusChangeListener { v, hasFocus ->
-            if (hasFocus) {
-                (v as EditText).text.clear()
-            }
-        }
-
         val editTextCostingCourse = findViewById<EditText>(R.id.editTextCostingCourse)
-        editTextCostingCourse.onFocusChangeListener = View.OnFocusChangeListener { v, hasFocus ->
-            if (hasFocus) {
-                (v as EditText).text.clear()
-            }
-        }
-
         val editTextLongTimeCourse = findViewById<EditText>(R.id.editTextLongTimeCourse)
-        editTextLongTimeCourse.onFocusChangeListener = View.OnFocusChangeListener { v, hasFocus ->
-            if (hasFocus) {
-                (v as EditText).text.clear()
-            }
-        }
-
         val editTextDirectionCourse = findViewById<EditText>(R.id.editTextDirectionCourse)
-        editTextDirectionCourse.onFocusChangeListener = View.OnFocusChangeListener { v, hasFocus ->
-            if (hasFocus) {
-                (v as EditText).text.clear()
-            }
-        }
+
+        setEditTextFocusListener(editTextNameCourse, "Название")
+        setEditTextFocusListener(editTextCostingCourse, "Стоимость")
+        setEditTextFocusListener(editTextLongTimeCourse, "Длительность")
+        setEditTextFocusListener(editTextDirectionCourse, "Направление")
 
         val buttonProfile = findViewById<Button>(R.id.buttonProfile)
         buttonProfile.setOnClickListener{
@@ -104,35 +87,23 @@ class CreatingCourseUserTeacherActivity : AppCompatActivity() {
         val duration = findViewById<EditText>(R.id.editTextLongTimeCourse).text.toString()
         val theme = findViewById<EditText>(R.id.editTextDirectionCourse).text.toString()
 
-        Log.d("CreateCourse", "Название курса: $name")
-        Log.d("CreateCourse", "Цена курса: $price")
-        Log.d("CreateCourse", "Продолжительность курса: $duration")
-        Log.d("CreateCourse", "Тема курса: $theme")
-
         val courseRequest = AddCourseRequest(duration, price, theme, name, "Курс активен")
         val sharedPreferences = getSharedPreferences("MyAppPrefs", MODE_PRIVATE)
         val jwtToken = sharedPreferences.getString("JWT_TOKEN", "") ?: ""
 
-        Log.d("CreateCourse", "JWT Token: $jwtToken")
-        Log.d("CreateCourse", "Course Request: $courseRequest")
 
         RetrofitClient.createApiService(this).createCourse(jwtToken, courseRequest).enqueue(object : Callback<BaseResponse> {
             override fun onResponse(call: Call<BaseResponse>, response: Response<BaseResponse>) {
-                Log.d("CreateCourse", "Response code: ${response.code()}")
-                Log.d("CreateCourse", "Response body: ${response.body()}")
                 if (response.isSuccessful) {
                     val baseResponse = response.body()
                     if (baseResponse?.success == true) {
                         Toast.makeText(this@CreatingCourseUserTeacherActivity, "Курс успешно создан", Toast.LENGTH_SHORT).show()
-                        Log.d("CreateCourse", "Курс успешно создан")
                         AppMetrica.reportEvent("add_course")
                         finish()
                     } else {
                         Toast.makeText(this@CreatingCourseUserTeacherActivity, baseResponse?.message ?: "Ошибка создания курса", Toast.LENGTH_SHORT).show()
-                        Log.e("CreateCourse", "Ошибка создания курса: ${baseResponse?.message}")
                     }
                 } else {
-                    Log.e("CreateCourse", "Server Error: ${response.errorBody()?.string()}")
                     Toast.makeText(this@CreatingCourseUserTeacherActivity, "Ошибка сервера", Toast.LENGTH_SHORT).show()
                 }
             }
@@ -142,5 +113,23 @@ class CreatingCourseUserTeacherActivity : AppCompatActivity() {
                 Toast.makeText(this@CreatingCourseUserTeacherActivity, "Ошибка соединения", Toast.LENGTH_SHORT).show()
             }
         })
+    }
+
+    private fun setEditTextFocusListener(editText: EditText, hint: String, isPassword: Boolean = false) {
+        editText.setOnFocusChangeListener { v, hasFocus ->
+            if (hasFocus && editText.text.toString() == hint) {
+                editText.setText("")
+                editText.setTextColor(resources.getColor(android.R.color.black))
+                if (isPassword) {
+                    editText.inputType = android.text.InputType.TYPE_CLASS_TEXT or android.text.InputType.TYPE_TEXT_VARIATION_PASSWORD
+                }
+            } else if (!hasFocus && editText.text.toString().isEmpty()) {
+                editText.setText(hint)
+                editText.setTextColor(resources.getColor(android.R.color.darker_gray))
+                if (isPassword) {
+                    editText.inputType = android.text.InputType.TYPE_CLASS_TEXT
+                }
+            }
+        }
     }
 }

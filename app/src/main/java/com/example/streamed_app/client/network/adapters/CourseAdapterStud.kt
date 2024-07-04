@@ -13,7 +13,7 @@ import com.example.streamed_app.client.network.response.CourseResponse
 
 class CoursesAdapterStud(
     private var courses: List<CourseResponse>,
-    private val subscribeClickListener: (Int) -> Unit
+    private val subscribeClickListener: (Int, Boolean) -> Unit
 ) : RecyclerView.Adapter<CoursesAdapterStud.CourseViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CourseViewHolder {
@@ -25,44 +25,40 @@ class CoursesAdapterStud(
         holder.bind(courses[position])
     }
 
+    fun updateCourses(newCourses: List<CourseResponse>, subscribedCourseIds: List<Int>) {
+        val updatedCourses = newCourses.map { course ->
+            course.copy(subscribed = course.id in subscribedCourseIds)
+        }
+        courses = updatedCourses.sortedByDescending { it.subscribed }
+        notifyDataSetChanged()
+    }
+
     override fun getItemCount(): Int = courses.size
 
     inner class CourseViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         private val textNameCourse: TextView = itemView.findViewById(R.id.textNameCourse)
-//        private val textNameTeacher: TextView = itemView.findViewById(R.id.textNameTeacher)
         private val textDescCourse: TextView = itemView.findViewById(R.id.textDescCourse)
         private val textTimeCourse: TextView = itemView.findViewById(R.id.textTimeCourse)
         private val buttonSubscribe: Button = itemView.findViewById(R.id.buttonSubscribeOnCourse)
-        private val imageViewCheck: ImageView = itemView.findViewById(R.id.imageViewCheck)
-        private val textSubscribedMessage: TextView = itemView.findViewById(R.id.textSubscribedMessage)
 
         @SuppressLint("SetTextI18n")
         fun bind(course: CourseResponse) {
             textNameCourse.text = course.name
-//            textNameTeacher.text = course.ownerId.toString() // Измените на корректное значение, если требуется
             textDescCourse.text = course.theme
             textTimeCourse.text = course.duration
 
             if (course.subscribed) {
-                imageViewCheck.visibility = View.VISIBLE
-                buttonSubscribe.visibility = View.GONE
-                textSubscribedMessage.visibility = View.VISIBLE
+                buttonSubscribe.text = "Вы подписаны на курс"
+                buttonSubscribe.setBackgroundTintList(itemView.context.getColorStateList(R.color.green))
             } else {
-                imageViewCheck.visibility = View.GONE
-                buttonSubscribe.visibility = View.VISIBLE
-                textSubscribedMessage.visibility = View.GONE
+                buttonSubscribe.text = "Подписаться"
+                buttonSubscribe.setBackgroundTintList(itemView.context.getColorStateList(R.color.gray))
             }
 
             buttonSubscribe.setOnClickListener {
-                subscribeClickListener.invoke(course.id)
+                subscribeClickListener.invoke(course.id, course.subscribed)
             }
         }
-    }
-
-    @SuppressLint("NotifyDataSetChanged")
-    fun updateCourses(newCourses: List<CourseResponse>) {
-        courses = newCourses.sortedByDescending { it.subscribed }
-        notifyDataSetChanged()
     }
 
     @SuppressLint("NotifyDataSetChanged")

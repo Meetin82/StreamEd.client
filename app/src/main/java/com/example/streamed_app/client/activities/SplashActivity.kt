@@ -1,5 +1,6 @@
 package com.example.streamed_app.client.activities
 
+import android.annotation.SuppressLint
 import android.content.Intent
 import android.os.Bundle
 import android.widget.Button
@@ -11,6 +12,7 @@ import com.example.streamed_app.R
 import io.appmetrica.analytics.AppMetrica
 import io.appmetrica.analytics.AppMetricaConfig
 
+@SuppressLint("CustomSplashScreen")
 class SplashActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -26,7 +28,7 @@ class SplashActivity : AppCompatActivity() {
         }
         val buttonStart = findViewById<Button>(R.id.buttonStart)
         buttonStart.setOnClickListener{
-            val intent = Intent(this, UnloginCoursesActivity::class.java)
+            val intent = Intent(this, LoginUserActivity::class.java)
             startActivity(intent)
         }
     }

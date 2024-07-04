@@ -8,5 +8,5 @@ data class CourseResponse(
     val name: String,
     val description: String,
     val ownerId: Int,
-    val subscribed: Boolean
+    var subscribed: Boolean = false
 )

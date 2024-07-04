@@ -31,13 +31,10 @@ class ProfileUserTeacherActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_profile_user_teacher)
 
-        // Инициализация Retrofit сервиса
         apiService = RetrofitClient.createApiService(this)
 
-        // Получение информации о пользователе и обновление UI
         getUserInfoAndUpdateUI()
 
-        // Настройка кнопок для перехода на другие активити
         setupButtons()
     }
 
@@ -54,13 +51,11 @@ class ProfileUserTeacherActivity : AppCompatActivity() {
                             updateUI(userInfo)
                         }
                     } else {
-                        // Обработка ошибки получения данных о пользователе
                         Toast.makeText(this@ProfileUserTeacherActivity, "Ошибка при получении данных о пользователе", Toast.LENGTH_SHORT).show()
                     }
                 }
 
                 override fun onFailure(call: Call<UserInfoResponse>, t: Throwable) {
-                    // Обработка ошибки сети
                     Toast.makeText(this@ProfileUserTeacherActivity, "Ошибка соединения", Toast.LENGTH_SHORT).show()
                 }
             })
@@ -72,7 +67,6 @@ class ProfileUserTeacherActivity : AppCompatActivity() {
         findViewById<TextView>(R.id.textNameInMyProfile).text = userInfo.name
         findViewById<TextView>(R.id.textSurnameInMyProfile2).text = userInfo.surname
         findViewById<TextView>(R.id.textEmailInMyProfile).text = "E-mail: ${userInfo.email}"
-        // Добавьте другие поля, если нужно
     }
 
     private fun setupButtons() {
@@ -97,7 +91,6 @@ class ProfileUserTeacherActivity : AppCompatActivity() {
         }
 
         findViewById<Button>(R.id.buttonDeleteProfile).setOnClickListener {
-            // Показать диалог подтверждения удаления аккаунта
             showDialogDeleteConfirmation()
         }
     }
@@ -139,17 +132,14 @@ class ProfileUserTeacherActivity : AppCompatActivity() {
         if (!jwtToken.isNullOrBlank()) {
             apiService.deleteUser("Bearer $jwtToken").enqueue(object : Callback<String> {
                 override fun onResponse(call: Call<String>, response: Response<String>) {
-                    Log.d("ProfileUserTeacher", "deleteUser onResponse: ${response.code()} ${response.message()}")
                     handleDeleteUserResponse(response)
                 }
 
                 override fun onFailure(call: Call<String>, t: Throwable) {
-                    Log.e("ProfileUserTeacher", "deleteUser onFailure: ${t.message}", t)
                     Toast.makeText(this@ProfileUserTeacherActivity, "Ошибка соединения", Toast.LENGTH_SHORT).show()
                 }
             })
         } else {
-            Log.e("ProfileUserTeacher", "JWT Token is null or blank")
             Toast.makeText(this, "Токен не найден", Toast.LENGTH_SHORT).show()
         }
     }
@@ -163,19 +153,14 @@ class ProfileUserTeacherActivity : AppCompatActivity() {
                 editor.remove("JWT_TOKEN")
                 editor.apply()
 
-                // Переход на экран входа
                 val intent = Intent(this@ProfileUserTeacherActivity, LoginUserActivity::class.java)
                 intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
                 startActivity(intent)
-
-                Log.d("ProfileUserTeacher", "User deleted. Starting LoginActivity.")
             } else {
                 Toast.makeText(this, "Не удалось удалить пользователя", Toast.LENGTH_SHORT).show()
-                Log.d("ProfileUserTeacher", "Unexpected response: $responseBody")
             }
         } else {
             Toast.makeText(this, "Не удалось удалить пользователя", Toast.LENGTH_SHORT).show()
-            Log.d("ProfileUserTeacher", "Failed to delete user: ${response?.errorBody()?.string()}")
         }
     }
 
@@ -183,7 +168,6 @@ class ProfileUserTeacherActivity : AppCompatActivity() {
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
         if (requestCode == REQUEST_CODE_EXIT) {
-            // Действия после выхода из аккаунта
         }
     }
 }

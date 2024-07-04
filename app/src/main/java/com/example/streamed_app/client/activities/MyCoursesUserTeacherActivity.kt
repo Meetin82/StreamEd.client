@@ -71,44 +71,29 @@ class MyCoursesUserTeacherActivity : AppCompatActivity() {
         val sharedPreferences = getSharedPreferences("MyAppPrefs", MODE_PRIVATE)
         val jwtToken = sharedPreferences.getString("JWT_TOKEN", "")
         if (!jwtToken.isNullOrBlank()) {
-            Log.d("MyCoursesActivity", "JWT Token: $jwtToken") // Логирование JWT-токена
-
             apiService.getMyCourses(jwtToken.toString()).enqueue(object : Callback<List<CourseResponse>> {
-                override fun onResponse(
-                    call: Call<List<CourseResponse>>,
-                    response: Response<List<CourseResponse>>
-                ) {
-                    Log.d("MyCoursesActivity", "Server Response Code: ${response.code()}") // Логирование кода ответа
-                    Log.d("MyCoursesActivity", "Server Response Body: ${response.body()?.size}") // Логирование размера тела ответа
-
+                override fun onResponse(call: Call<List<CourseResponse>>, response: Response<List<CourseResponse>>) {
                     if (response.isSuccessful) {
                         val courses = response.body()
                         if (courses!= null) {
-                            Log.d("MyCoursesActivity", "Fetched Courses Count: ${courses.size}") // Логирование количества курсов
                             coursesAdapter.updateCourses(courses)
                         } else {
                             showError("Ошибка: ответ сервера пустой.")
-                            Log.e("MyCoursesActivity", "Empty server response body") // Логирование ошибки пустого тела ответа
                         }
                     } else {
                         showError("Ошибка ${response.code()}: ${response.message()}")
-                        Log.e("MyCoursesActivity", "Server error: ${response.code()}, Message: ${response.message()}") // Логирование ошибки сервера
                     }
                 }
 
                 override fun onFailure(call: Call<List<CourseResponse>>, t: Throwable) {
                     showError("Ошибка при выполнении запроса: ${t.message}")
-                    Log.e("MyCoursesActivity", "Request failure: ${t.message}") // Логирование ошибки выполнения запроса
                 }
             })
         } else {
             showError("Ошибка: JWT-токен отсутствует.")
-            Log.e("MyCoursesActivity", "JWT token is missing") // Логирование отсутствия JWT-токена
         }
     }
 
     private fun showError(message: String) {
-        // Можно добавить логику для отображения ошибки пользователю
-        // Например, использовать Snackbar или Toast для вывода сообщения
     }
 }

@@ -4,14 +4,28 @@ import android.annotation.SuppressLint
 import android.content.Intent
 import android.os.Bundle
 import android.widget.Button
+import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.example.streamed_app.R
+import com.example.streamed_app.client.network.ApiService
+import com.example.streamed_app.client.network.RetrofitClient
+import com.example.streamed_app.client.network.adapters.CourseAdapterForUnlogin
+import com.example.streamed_app.client.network.adapters.CoursesAdapterStud
+import com.example.streamed_app.client.network.response.CourseResponse
 import io.appmetrica.analytics.AppMetrica
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
 
 class UnloginCoursesActivity : AppCompatActivity() {
+    private lateinit var apiService: ApiService
+    private lateinit var recyclerView: RecyclerView
+    private lateinit var coursesAdapter: CourseAdapterForUnlogin
     @SuppressLint("MissingInflatedId")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -23,18 +37,35 @@ class UnloginCoursesActivity : AppCompatActivity() {
             insets
         }
 
-        val buttonUnlogin1 = findViewById<Button>(R.id.buttonLoginInCourse1)
-        buttonUnlogin1.setOnClickListener{
-            val intent = Intent(this, LoginUserActivity::class.java)
-            startActivity(intent)
-            AppMetrica.reportEvent("screen_login")
-        }
+        apiService = RetrofitClient.createApiService(this)
 
-        val buttonUnlogin2 = findViewById<Button>(R.id.buttonLoginInCourse2)
-        buttonUnlogin2.setOnClickListener{
-            val intent = Intent(this, LoginUserActivity::class.java)
-            startActivity(intent)
-            AppMetrica.reportEvent("screen_login")
-        }
+        recyclerView = findViewById(R.id.recyclerViewCoursesForUnlogin) // Изменено ID
+        recyclerView.layoutManager = LinearLayoutManager(this)
+        coursesAdapter = CourseAdapterForUnlogin(emptyList()) // Используем новый адаптер
+        recyclerView.adapter = coursesAdapter
+
+        fetchAllCourses()
+    }
+
+    private fun fetchAllCourses() {
+        apiService.getAllCourses().enqueue(object : Callback<List<CourseResponse>> {
+            override fun onResponse(
+                call: Call<List<CourseResponse>>,
+                response: Response<List<CourseResponse>>
+            ) {
+                if (response.isSuccessful) {
+                    val courses = response.body()
+                    courses?.let {
+                        coursesAdapter.updateCourses(it) // обновляем данные адаптера
+                    }
+                } else {
+                    Toast.makeText(this@UnloginCoursesActivity, "Ошибка загрузки курсов", Toast.LENGTH_SHORT).show()
+                }
+            }
+
+            override fun onFailure(call: Call<List<CourseResponse>>, t: Throwable) {
+                Toast.makeText(this@UnloginCoursesActivity, "Ошибка сети", Toast.LENGTH_SHORT).show()
+            }
+        })
     }
 }

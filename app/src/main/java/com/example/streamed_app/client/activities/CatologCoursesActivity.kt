@@ -1,6 +1,5 @@
 package com.example.streamed_app.client.activities
 
-import android.annotation.SuppressLint
 import android.content.Intent
 import android.os.Bundle
 import android.view.View
@@ -28,6 +27,7 @@ class CatologCoursesActivity : AppCompatActivity() {
     private lateinit var apiService: ApiService
     private lateinit var recyclerView: RecyclerView
     private lateinit var coursesAdapter: CoursesAdapterStud
+    private var subscribedCourseIds = mutableListOf<Int>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -38,11 +38,16 @@ class CatologCoursesActivity : AppCompatActivity() {
 
         recyclerView = findViewById(R.id.recyclerViewCoursesStud)
         recyclerView.layoutManager = LinearLayoutManager(this)
-        coursesAdapter = CoursesAdapterStud(emptyList()) { courseId ->
-            subscribeToCourse(courseId)
+        coursesAdapter = CoursesAdapterStud(emptyList()) { courseId, isSubscribed ->
+            if (isSubscribed) {
+                unsubscribeFromCourse(courseId)
+            } else {
+                subscribeToCourse(courseId)
+            }
         }
         recyclerView.adapter = coursesAdapter
 
+        fetchSubscribedCourses()
         fetchAllCourses()
 
         setupButtons()
@@ -75,9 +80,8 @@ class CatologCoursesActivity : AppCompatActivity() {
                 if (response.isSuccessful) {
                     val courses = response.body()
                     courses?.let {
-                        coursesAdapter.updateCourses(it)
+                        coursesAdapter.updateCourses(it, subscribedCourseIds)
                     }
-                    AppMetrica.reportEvent("view_course")
                 } else {
                     Toast.makeText(this@CatologCoursesActivity, "Ошибка загрузки курсов", Toast.LENGTH_SHORT).show()
                 }
@@ -89,13 +93,31 @@ class CatologCoursesActivity : AppCompatActivity() {
         })
     }
 
+    private fun fetchSubscribedCourses() {
+        apiService.getAllSubCourses().enqueue(object : Callback<List<Int>> {
+            override fun onResponse(call: Call<List<Int>>, response: Response<List<Int>>) {
+                if (response.isSuccessful) {
+                    subscribedCourseIds = response.body()?.toMutableList() ?: mutableListOf()
+                    fetchAllCourses()
+                } else {
+                    Toast.makeText(this@CatologCoursesActivity, "Ошибка загрузки подписанных курсов", Toast.LENGTH_SHORT).show()
+                }
+            }
+
+            override fun onFailure(call: Call<List<Int>>, t: Throwable) {
+                Toast.makeText(this@CatologCoursesActivity, "Ошибка сети", Toast.LENGTH_SHORT).show()
+            }
+        })
+    }
 
     private fun subscribeToCourse(courseId: Int) {
         val subscribeRequest = AddSubscribe(courseId)
         apiService.subscribeUser(subscribeRequest).enqueue(object : Callback<BaseResponse> {
             override fun onResponse(call: Call<BaseResponse>, response: Response<BaseResponse>) {
                 if (response.isSuccessful) {
+                    subscribedCourseIds.add(courseId)
                     coursesAdapter.updateSubscription(courseId, true)
+                    AppMetrica.reportEvent("subscribe_course")
                     Toast.makeText(this@CatologCoursesActivity, "Вы успешно подписались на курс", Toast.LENGTH_SHORT).show()
                 } else {
                     Toast.makeText(this@CatologCoursesActivity, "Ошибка подписки на курс", Toast.LENGTH_SHORT).show()
@@ -108,6 +130,26 @@ class CatologCoursesActivity : AppCompatActivity() {
         })
     }
 
+    private fun unsubscribeFromCourse(courseId: Int) {
+        val sharedPreferences = getSharedPreferences("MyAppPrefs", MODE_PRIVATE)
+        val jwtToken = sharedPreferences.getString("JWT_TOKEN", "")
+
+        apiService.unsubscribeUser(courseId, jwtToken.toString()).enqueue(object : Callback<BaseResponse> {
+            override fun onResponse(call: Call<BaseResponse>, response: Response<BaseResponse>) {
+                if (response.isSuccessful) {
+                    subscribedCourseIds.remove(courseId)
+                    coursesAdapter.updateSubscription(courseId, false)
+                    Toast.makeText(this@CatologCoursesActivity, "Вы успешно отписались от курса", Toast.LENGTH_SHORT).show()
+                } else {
+                    Toast.makeText(this@CatologCoursesActivity, "Ошибка отписки от курса: ${response.code()}", Toast.LENGTH_SHORT).show()
+                }
+            }
+
+            override fun onFailure(call: Call<BaseResponse>, t: Throwable) {
+                Toast.makeText(this@CatologCoursesActivity, "Ошибка сети: ${t.message}", Toast.LENGTH_SHORT).show()
+            }
+        })
+    }
 
     private fun enableEdgeToEdge() {
         val mainView = findViewById<View>(R.id.recyclerViewCoursesStud)

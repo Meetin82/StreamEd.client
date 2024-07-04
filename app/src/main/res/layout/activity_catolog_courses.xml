@@ -18,197 +18,8 @@
         app:layout_constraintBottom_toTopOf="@+id/imageLineLowBar"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-<!--    <ImageView-->
-<!--        android:id="@+id/imageRectUnlogin1"-->
-<!--        android:layout_width="wrap_content"-->
-<!--        android:layout_height="wrap_content"-->
-<!--        android:layout_marginTop="72dp"-->
-<!--        app:layout_constraintEnd_toEndOf="parent"-->
-<!--        app:layout_constraintHorizontal_bias="0.492"-->
-<!--        app:layout_constraintStart_toStartOf="parent"-->
-<!--        app:layout_constraintTop_toTopOf="parent"-->
-<!--        app:srcCompat="@drawable/rectangle_unlogin" />-->
-
-<!--    <Button-->
-<!--        android:id="@+id/buttonSubscribedCourse"-->
-<!--        android:layout_width="145dp"-->
-<!--        android:layout_height="45dp"-->
-<!--        android:backgroundTint="#222227"-->
-<!--        android:textColorLink="#222227"-->
-<!--        app:layout_constraintBottom_toBottomOf="@+id/imageRectUnlogin1"-->
-<!--        app:layout_constraintEnd_toEndOf="@+id/imageRectUnlogin1"-->
-<!--        app:layout_constraintHorizontal_bias="0.05"-->
-<!--        app:layout_constraintStart_toStartOf="@+id/imageRectUnlogin1"-->
-<!--        app:layout_constraintTop_toTopOf="@+id/imageRectUnlogin1"-->
-<!--        app:layout_constraintVertical_bias="0.884" />-->
-
-<!--    <TextView-->
-<!--        android:id="@+id/textNameTeacher1"-->
-<!--        android:layout_width="100dp"-->
-<!--        android:layout_height="19dp"-->
-<!--        android:text="Иван Иванов"-->
-<!--        app:layout_constraintBottom_toBottomOf="@+id/imageRectUnlogin1"-->
-<!--        app:layout_constraintEnd_toEndOf="@+id/imageRectUnlogin1"-->
-<!--        app:layout_constraintHorizontal_bias="1.0"-->
-<!--        app:layout_constraintStart_toStartOf="@+id/imageRectUnlogin1"-->
-<!--        app:layout_constraintTop_toTopOf="@+id/imageRectUnlogin1"-->
-<!--        app:layout_constraintVertical_bias="0.789" />-->
-
-<!--    <TextView-->
-<!--        android:id="@+id/textDescCourseInUnlogin1"-->
-<!--        android:layout_width="225dp"-->
-<!--        android:layout_height="19dp"-->
-<!--        android:text="C++"-->
-<!--        android:textColor="#808080"-->
-<!--        app:layout_constraintBottom_toBottomOf="@+id/imageRectUnlogin1"-->
-<!--        app:layout_constraintEnd_toEndOf="@+id/imageRectUnlogin1"-->
-<!--        app:layout_constraintHorizontal_bias="0.206"-->
-<!--        app:layout_constraintStart_toStartOf="@+id/imageRectUnlogin1"-->
-<!--        app:layout_constraintTop_toBottomOf="@+id/textNameCourseInUnlogin1"-->
-<!--        app:layout_constraintVertical_bias="0.012" />-->
-
-<!--    <TextView-->
-<!--        android:id="@+id/textNameCourseInUnlogin1"-->
-<!--        android:layout_width="225dp"-->
-<!--        android:layout_height="19dp"-->
-<!--        android:text="Хороший, плохой, злой"-->
-<!--        app:layout_constraintBottom_toBottomOf="@+id/imageRectUnlogin1"-->
-<!--        app:layout_constraintEnd_toEndOf="@+id/imageRectUnlogin1"-->
-<!--        app:layout_constraintHorizontal_bias="0.206"-->
-<!--        app:layout_constraintStart_toStartOf="@+id/imageRectUnlogin1"-->
-<!--        app:layout_constraintTop_toTopOf="@+id/imageRectUnlogin1"-->
-<!--        app:layout_constraintVertical_bias="0.156" />-->
-
-<!--    <ImageView-->
-<!--        android:id="@+id/imageTime2"-->
-<!--        android:layout_width="wrap_content"-->
-<!--        android:layout_height="wrap_content"-->
-<!--        android:layout_marginEnd="148dp"-->
-<!--        app:layout_constraintBottom_toBottomOf="@+id/imageRectUnlogin1"-->
-<!--        app:layout_constraintEnd_toEndOf="@+id/imageRectUnlogin1"-->
-<!--        app:layout_constraintHorizontal_bias="0.0"-->
-<!--        app:layout_constraintStart_toEndOf="@+id/buttonSubscribedCourse"-->
-<!--        app:layout_constraintTop_toTopOf="@+id/imageRectUnlogin1"-->
-<!--        app:layout_constraintVertical_bias="0.901"-->
-<!--        app:srcCompat="@drawable/time" />-->
-
-
-<!--    <TextView-->
-<!--        android:id="@+id/textTimeCourse1"-->
-<!--        android:layout_width="25dp"-->
-<!--        android:layout_height="19dp"-->
-<!--        android:text="7 ч."-->
-<!--        android:textColor="#808080"-->
-<!--        app:layout_constraintBottom_toBottomOf="@+id/imageRectUnlogin1"-->
-<!--        app:layout_constraintEnd_toEndOf="@+id/imageRectUnlogin1"-->
-<!--        app:layout_constraintHorizontal_bias="0.609"-->
-<!--        app:layout_constraintStart_toStartOf="@+id/imageRectUnlogin1"-->
-<!--        app:layout_constraintTop_toBottomOf="@+id/textNameCourseInUnlogin1"-->
-<!--        app:layout_constraintVertical_bias="0.885" />-->
-
-<!--    <ImageView-->
-<!--        android:id="@+id/imageView14"-->
-<!--        android:layout_width="wrap_content"-->
-<!--        android:layout_height="wrap_content"-->
-<!--        app:layout_constraintBottom_toBottomOf="@+id/buttonSubscribedCourse"-->
-<!--        app:layout_constraintEnd_toEndOf="@+id/buttonSubscribedCourse"-->
-<!--        app:layout_constraintStart_toStartOf="@+id/buttonSubscribedCourse"-->
-<!--        app:layout_constraintTop_toTopOf="@+id/buttonSubscribedCourse"-->
-<!--        app:srcCompat="@drawable/check_galka" />-->
-
-<!--    <ImageView-->
-<!--        android:id="@+id/imageRectUnlogin2"-->
-<!--        android:layout_width="wrap_content"-->
-<!--        android:layout_height="wrap_content"-->
-<!--        android:layout_marginTop="16dp"-->
-<!--        app:layout_constraintBottom_toBottomOf="parent"-->
-<!--        app:layout_constraintEnd_toEndOf="parent"-->
-<!--        app:layout_constraintHorizontal_bias="0.492"-->
-<!--        app:layout_constraintStart_toStartOf="parent"-->
-<!--        app:layout_constraintTop_toBottomOf="@+id/imageRectUnlogin1"-->
-<!--        app:layout_constraintVertical_bias="0.0"-->
-<!--        app:srcCompat="@drawable/rectangle_unlogin" />-->
-
-
-<!--    <Button-->
-<!--        android:id="@+id/buttonSubscribeOnCourse"-->
-<!--        android:layout_width="137dp"-->
-<!--        android:layout_height="45dp"-->
-<!--        android:backgroundTint="#222227"-->
-<!--        android:text="Подписаться"-->
-<!--        app:layout_constraintBottom_toBottomOf="@+id/imageRectUnlogin2"-->
-<!--        app:layout_constraintEnd_toEndOf="@+id/imageRectUnlogin2"-->
-<!--        app:layout_constraintHorizontal_bias="0.05"-->
-<!--        app:layout_constraintStart_toStartOf="@+id/imageRectUnlogin2"-->
-<!--        app:layout_constraintTop_toTopOf="@+id/imageRectUnlogin2"-->
-<!--        app:layout_constraintVertical_bias="0.859" />-->
-
-<!--    <TextView-->
-<!--        android:id="@+id/textNameTeacher2"-->
-<!--        android:layout_width="140dp"-->
-<!--        android:layout_height="19dp"-->
-<!--        android:text="Андрей Андреевич"-->
-<!--        app:layout_constraintBottom_toBottomOf="@+id/imageRectUnlogin2"-->
-<!--        app:layout_constraintEnd_toEndOf="@+id/imageRectUnlogin2"-->
-<!--        app:layout_constraintHorizontal_bias="1.0"-->
-<!--        app:layout_constraintStart_toStartOf="@+id/imageRectUnlogin2"-->
-<!--        app:layout_constraintTop_toTopOf="@+id/imageRectUnlogin2"-->
-<!--        app:layout_constraintVertical_bias="0.755" />-->
-
-<!--    <TextView-->
-<!--        android:id="@+id/textNameCourseInUnlogin2"-->
-<!--        android:layout_width="225dp"-->
-<!--        android:layout_height="19dp"-->
-<!--        android:text="Прогаем змейку"-->
-<!--        app:layout_constraintBottom_toBottomOf="@+id/imageRectUnlogin2"-->
-<!--        app:layout_constraintEnd_toEndOf="@+id/imageRectUnlogin2"-->
-<!--        app:layout_constraintHorizontal_bias="0.206"-->
-<!--        app:layout_constraintStart_toStartOf="@+id/imageRectUnlogin2"-->
-<!--        app:layout_constraintTop_toTopOf="@+id/imageRectUnlogin2"-->
-<!--        app:layout_constraintVertical_bias="0.163" />-->
-
-
-<!--    <TextView-->
-<!--        android:id="@+id/textDescCourseInUnlogin2"-->
-<!--        android:layout_width="225dp"-->
-<!--        android:layout_height="19dp"-->
-<!--        android:text="Python"-->
-<!--        android:textColor="#808080"-->
-<!--        app:layout_constraintBottom_toBottomOf="@+id/imageRectUnlogin2"-->
-<!--        app:layout_constraintEnd_toEndOf="@+id/imageRectUnlogin2"-->
-<!--        app:layout_constraintHorizontal_bias="0.206"-->
-<!--        app:layout_constraintStart_toStartOf="@+id/imageRectUnlogin2"-->
-<!--        app:layout_constraintTop_toBottomOf="@+id/textNameCourseInUnlogin2"-->
-<!--        app:layout_constraintVertical_bias="0.0" />-->
-
-<!--    <ImageView-->
-<!--        android:id="@+id/imageTime"-->
-<!--        android:layout_width="wrap_content"-->
-<!--        android:layout_height="wrap_content"-->
-<!--        android:layout_marginEnd="148dp"-->
-<!--        app:layout_constraintBottom_toBottomOf="@+id/imageRectUnlogin2"-->
-<!--        app:layout_constraintEnd_toEndOf="@+id/imageRectUnlogin2"-->
-<!--        app:layout_constraintStart_toEndOf="@+id/buttonSubscribeOnCourse"-->
-<!--        app:layout_constraintTop_toTopOf="@+id/imageRectUnlogin2"-->
-<!--        app:layout_constraintVertical_bias="0.88"-->
-<!--        app:srcCompat="@drawable/time" />-->
-
-
-<!--    <TextView-->
-<!--        android:id="@+id/textTimeCourse2"-->
-<!--        android:layout_width="25dp"-->
-<!--        android:layout_height="19dp"-->
-<!--        android:text="3 ч."-->
-<!--        android:textColor="#808080"-->
-<!--        app:layout_constraintBottom_toBottomOf="@+id/imageRectUnlogin2"-->
-<!--        app:layout_constraintEnd_toEndOf="@+id/imageRectUnlogin2"-->
-<!--        app:layout_constraintHorizontal_bias="0.064"-->
-<!--        app:layout_constraintStart_toEndOf="@+id/imageTime"-->
-<!--        app:layout_constraintTop_toTopOf="@+id/imageRectUnlogin2"-->
-<!--        app:layout_constraintVertical_bias="0.884" />-->
-
+        app:layout_constraintTop_toTopOf="parent"
+        tools:listitem="@layout/item_course"/>
 
     <ImageView
         android:id="@+id/imageLineLowBar"
@@ -222,7 +33,8 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.0"
-        app:srcCompat="@drawable/line_low_bar" />
+        app:srcCompat="@drawable/line_low_bar"
+        tools:ignore="ContentDescription" />
 
     <Button
         android:id="@+id/buttonConnect"
@@ -295,7 +107,8 @@
         app:layout_constraintStart_toStartOf="@+id/buttonConnect"
         app:layout_constraintTop_toTopOf="@+id/buttonConnect"
         app:layout_constraintVertical_bias="0.00999999"
-        app:srcCompat="@drawable/connect" />
+        app:srcCompat="@drawable/connect"
+        tools:ignore="ContentDescription" />
 
     <ImageView
         android:id="@+id/imageCatalogActive"
@@ -307,7 +120,8 @@
         app:layout_constraintStart_toEndOf="@+id/buttonConnect"
         app:layout_constraintTop_toTopOf="@+id/buttonCatalog"
         app:layout_constraintVertical_bias="0.0"
-        app:srcCompat="@drawable/catalog_active" />
+        app:srcCompat="@drawable/catalog_active"
+        tools:ignore="ContentDescription" />
 
     <ImageView
         android:id="@+id/imageTimetable"
@@ -319,7 +133,8 @@
         app:layout_constraintStart_toEndOf="@+id/buttonCatalog"
         app:layout_constraintTop_toTopOf="@+id/buttonTimetable"
         app:layout_constraintVertical_bias="0.0"
-        app:srcCompat="@drawable/calendar" />
+        app:srcCompat="@drawable/calendar"
+        tools:ignore="ContentDescription" />
 
     <ImageView
         android:id="@+id/imageVideo"
@@ -331,7 +146,8 @@
         app:layout_constraintStart_toEndOf="@+id/buttonTimetable"
         app:layout_constraintTop_toTopOf="@+id/buttonVideo"
         app:layout_constraintVertical_bias="0.0"
-        app:srcCompat="@drawable/video" />
+        app:srcCompat="@drawable/video"
+        tools:ignore="ContentDescription" />
 
     <ImageView
         android:id="@+id/imageProfile"
@@ -343,7 +159,8 @@
         app:layout_constraintStart_toStartOf="@+id/buttonProfile"
         app:layout_constraintTop_toTopOf="@+id/buttonProfile"
         app:layout_constraintVertical_bias="0.0"
-        app:srcCompat="@drawable/profile" />
+        app:srcCompat="@drawable/profile"
+        tools:ignore="ContentDescription" />
 
     <TextView
         android:id="@+id/textConnect"
@@ -355,7 +172,8 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="@+id/buttonConnect"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageConnectStudent" />
+        app:layout_constraintTop_toBottomOf="@+id/imageConnectStudent"
+        tools:ignore="HardcodedText,SpUsage" />
 
     <TextView
         android:id="@+id/textCatalog"
@@ -367,7 +185,8 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="@+id/buttonCatalog"
         app:layout_constraintStart_toEndOf="@+id/buttonConnect"
-        app:layout_constraintTop_toBottomOf="@+id/imageView15" />
+        app:layout_constraintTop_toBottomOf="@+id/imageView15"
+        tools:ignore="HardcodedText,SpUsage" />
 
     <TextView
         android:id="@+id/textTimetable"
@@ -379,7 +198,8 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="@+id/buttonTimetable"
         app:layout_constraintStart_toEndOf="@+id/buttonCatalog"
-        app:layout_constraintTop_toBottomOf="@+id/imageTimetable" />
+        app:layout_constraintTop_toBottomOf="@+id/imageTimetable"
+        tools:ignore="HardcodedText,SpUsage" />
 
     <TextView
         android:id="@+id/textVideo"
@@ -391,7 +211,8 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/buttonProfile"
         app:layout_constraintStart_toEndOf="@+id/buttonTimetable"
-        app:layout_constraintTop_toBottomOf="@+id/imageVideo" />
+        app:layout_constraintTop_toBottomOf="@+id/imageVideo"
+        tools:ignore="HardcodedText,SpUsage" />
 
     <TextView
         android:id="@+id/textProfile"
@@ -403,7 +224,8 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="@+id/buttonProfile"
         app:layout_constraintStart_toStartOf="@+id/buttonProfile"
-        app:layout_constraintTop_toBottomOf="@+id/imageProfile" />
+        app:layout_constraintTop_toBottomOf="@+id/imageProfile"
+        tools:ignore="HardcodedText,SpUsage" />
 
     <ImageView
         android:id="@+id/imageView15"
@@ -415,6 +237,7 @@
         app:layout_constraintStart_toEndOf="@+id/buttonConnect"
         app:layout_constraintTop_toTopOf="@+id/buttonCatalog"
         app:layout_constraintVertical_bias="0.0"
-        app:srcCompat="@drawable/catalog_active" />
+        app:srcCompat="@drawable/catalog_active"
+        tools:ignore="ContentDescription" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
